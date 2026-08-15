@@ -1,0 +1,298 @@
+/* ==========================================================================
+   Foodbeer — декоративный слой
+   Это то, что делает Organi узнаваемым: контурный рисунок еды на подложке,
+   летящие листья, топо-паттерн, зелёный мазок под надзаголовком, крупные
+   скруглённые полосы-овалы и круговая инфографика с выносками.
+
+   Все изображения — НАСТОЯЩИЕ ассеты из исходного файла Figma, вытащенные
+   через GET /v1/files/:key/images (315 image-fill), а не нарисованные заново.
+   Список и происхождение — docs/06-производство.md.
+
+   Весь декор помечен aria-hidden и pointer-events:none — он не мешает
+   ни курсору, ни экранному диктору.
+   ========================================================================== */
+
+.decor {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.decor img { width: 100%; height: auto; display: block; }
+
+/* Секция, внутри которой лежит декор, должна создавать контекст
+   и обрезать вылеты за края — иначе появится горизонтальный скролл
+   (ТЗ 23.2 требует его отсутствия). */
+.has-decor { position: relative; overflow: hidden; }
+.has-decor > .container { position: relative; z-index: 1; }
+
+/* ==========================================================================
+   Подложки-паттерны
+   ========================================================================== */
+
+/* Контурный рисунок еды полосой сверху и снизу секции.
+   Донор: Home Page 1, секция «Good Organic Products». */
+.section--food-pattern { position: relative; overflow: hidden; }
+.section--food-pattern::before,
+.section--food-pattern::after {
+  content: '';
+  position: absolute; left: 0; right: 0; height: 260px;
+  background: url('decor/pattern-food-band.png') center / auto 100% repeat-x;
+  opacity: .5;
+  pointer-events: none;
+}
+.section--food-pattern::before { top: 0; }
+.section--food-pattern::after  { bottom: 0; transform: scaleY(-1); }
+.section--food-pattern > .container { position: relative; z-index: 1; }
+
+/* Разреженный вариант — когда полоса сверху и снизу слишком громко */
+.section--food-sparse { position: relative; overflow: hidden; }
+.section--food-sparse::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('decor/pattern-food-sparse.png') center / cover no-repeat;
+  opacity: .55;
+  pointer-events: none;
+}
+.section--food-sparse > .container { position: relative; z-index: 1; }
+
+/* Вертикальные полосы по краям — приём blog/product-страниц Organi */
+.section--food-sides { position: relative; overflow: hidden; }
+.section--food-sides::before,
+.section--food-sides::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; width: 190px;
+  background: url('decor/pattern-food-strip.png') top center / 100% auto repeat-y;
+  opacity: .6;
+  pointer-events: none;
+}
+.section--food-sides::before { left: 0; }
+.section--food-sides::after  { right: 0; transform: scaleX(-1); }
+.section--food-sides > .container { position: relative; z-index: 1; }
+@media (max-width: 1400px) { .section--food-sides::before, .section--food-sides::after { display: none; } }
+
+/* Топо-паттерн. Донор: «Trusted Organic Store» (Home 4), «Leave A Message». */
+.section--topo { position: relative; overflow: hidden; background: var(--surface-green); }
+.section--topo::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('decor/pattern-topo.png') center / 620px auto repeat;
+  opacity: .28;
+  pointer-events: none;
+}
+.section--topo > .container { position: relative; z-index: 1; }
+
+/* ==========================================================================
+   Летящие листья
+   Раскладка повторяет исходник: крупный лист врезается в угол секции,
+   мелкие разлетаются по полю.
+   ========================================================================== */
+
+.leaves { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.leaves span { position: absolute; display: block; }
+.leaves img { width: 100%; height: auto; }
+
+/* Крупный лист мяты, врезающийся в левый верхний угол.
+   Донор: секция «Protein Powders» на Home Page 1. */
+.leaf-tl { top: -30px; left: -40px; width: 200px; transform: rotate(-12deg); }
+.leaf-tr { top: -20px; right: -30px; width: 180px; transform: scaleX(-1) rotate(-8deg); }
+.leaf-bl { bottom: -30px; left: 2%;  width: 130px; transform: rotate(24deg); }
+.leaf-br { bottom: -20px; right: 4%; width: 210px; transform: scaleX(-1) rotate(14deg); }
+
+/* Россыпь мелких листьев поверх секции */
+.leaves--scatter { background: url('decor/leaves-falling.png') 8% 12% / 420px auto no-repeat,
+                               url('decor/leaves-falling-2.png') 94% 78% / 190px auto no-repeat; opacity: .9; }
+
+/* Ветка в правом верхнем углу. Донор: блок «журнал» на Home Page 1. */
+.branch-tr {
+  position: absolute; top: -40px; right: -60px; width: 420px;
+  background: url('decor/leaves-corner.png') top right / contain no-repeat;
+  aspect-ratio: 828 / 900;
+  pointer-events: none;
+}
+@media (max-width: 992px) {
+  .leaf-tl, .leaf-tr, .leaf-bl, .leaf-br { width: 110px; }
+  .branch-tr { width: 220px; }
+}
+@media (max-width: 576px) {
+  .leaves, .branch-tr { display: none; }
+}
+
+/* ==========================================================================
+   Зелёный мазок кистью под надзаголовком
+   Донор: метка «100% ORGANIC FOODS» на всех четырёх главных.
+   ========================================================================== */
+
+.brush {
+  position: relative;
+  display: inline-block;
+  padding: 7px 26px;
+  font-size: var(--fs-caption);
+  line-height: var(--lh-caption);
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.brush::before {
+  content: '';
+  position: absolute; inset: -6px -14px;
+  background: url('decor/brush-green.png') center / 100% 100% no-repeat;
+  z-index: -1;
+}
+
+/* ==========================================================================
+   Крупные скруглённые полосы-овалы
+   Донор: «Sale 68% Off» на бежевой заливке (Home 2) и светло-серый овал
+   вокруг hero (Home 2). Приём: полоса во всю ширину со скруглением
+   только с одной стороны, уходящая за край экрана.
+   ========================================================================== */
+
+.band {
+  position: relative;
+  padding: var(--s6) 0;
+  background: var(--surface-warm);
+}
+.band--round-l  { border-radius: 0 var(--r-lg) var(--r-lg) 0; margin-right: var(--gutter); }
+.band--round-r  { border-radius: var(--r-lg) 0 0 var(--r-lg); margin-left: var(--gutter); }
+.band--oval-l   { border-radius: 0 50% 50% 0 / 0 50% 50% 0; }
+.band--oval-r   { border-radius: 50% 0 0 50% / 50% 0 0 50%; }
+.band--cool     { background: var(--surface-1); }
+.band--green    { background: var(--surface-green); }
+.band--grey     { background: var(--surface-grey); }
+@media (max-width: 992px) {
+  .band--oval-l, .band--oval-r { border-radius: var(--r-lg); }
+  .band--round-l, .band--round-r { margin: 0; border-radius: var(--r-lg); }
+}
+
+/* Овал-подложка позади героя. Донор: Home Page 2. */
+.hero-oval { position: relative; }
+.hero-oval::before {
+  content: '';
+  position: absolute; top: -60px; right: -12%; bottom: -60px; left: 32%;
+  background: var(--surface-1);
+  border-radius: 50%;
+  z-index: 0;
+}
+.hero-oval > * { position: relative; z-index: 1; }
+@media (max-width: 992px) { .hero-oval::before { display: none; } }
+
+/* ==========================================================================
+   Круговая инфографика с выносками
+   Донор: «Our Organic Products» (Home 1) и «Fresh Produce» (Home 2) —
+   круг по центру, подписи слева и справа, у каждой — круглая иконка
+   на белом с тенью, привязанная к окружности.
+   ========================================================================== */
+
+.orbit {
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 420px) 1fr;
+  gap: var(--s4);
+  align-items: center;
+}
+.orbit__side { display: flex; flex-direction: column; gap: var(--s4); }
+.orbit__side--left  { text-align: right; }
+.orbit__item { display: flex; gap: var(--s2); align-items: flex-start; }
+.orbit__side--left .orbit__item { flex-direction: row-reverse; }
+.orbit__icon {
+  flex: 0 0 58px; width: 58px; height: 58px;
+  border-radius: 50%; background: var(--white);
+  box-shadow: var(--sh-card);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; padding: 8px;
+}
+.orbit__icon img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.orbit__title { font-size: var(--fs-body-lg); font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.orbit__text { font-size: var(--fs-caption); line-height: 18px; color: var(--body); }
+
+/* Центральный зелёный круг */
+.orbit__center { position: relative; aspect-ratio: 1; }
+.orbit__center::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: var(--green);
+}
+.orbit__center--ring::before { background: none; border: 42px solid var(--green); }
+.orbit__center-inner {
+  position: absolute; inset: 12%;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  padding: 12%;
+  overflow: hidden;
+}
+.orbit__center-inner img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+
+@media (max-width: 992px) {
+  .orbit { grid-template-columns: 1fr; }
+  .orbit__side--left { text-align: left; }
+  .orbit__side--left .orbit__item { flex-direction: row; }
+  .orbit__center { max-width: 320px; margin: 0 auto; }
+  .orbit__center--ring::before { border-width: 26px; }
+}
+
+/* ==========================================================================
+   Блок «две картинки лесенкой»
+   Донор: Home Page 2, about_us, about_us_2.
+   ========================================================================== */
+
+.stack-media { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+.stack-media > :first-child { margin-top: var(--s5); }
+.stack-media .ph, .stack-media img { border-radius: var(--r-lg); }
+@media (max-width: 576px) { .stack-media > :first-child { margin-top: 0; } }
+
+/* Цитата с вертикальной зелёной чертой. Донор: about_us. */
+.pullquote {
+  border-left: 4px solid var(--green);
+  padding-left: var(--s3);
+  font-size: var(--fs-body-lg);
+  line-height: 27px;
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Зелёный блок с кнопкой видео
+   Донор: «DEMO VIDEO 1:30» на Home Page 1 и product_detail_v1.
+   ========================================================================== */
+
+.video-cta {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px;
+  min-height: 180px; padding: var(--s3);
+  background: var(--green); color: var(--white);
+  border-radius: var(--r-lg);
+  text-align: center;
+}
+.video-cta:hover { background: var(--green-dark); color: var(--white); text-decoration: none; }
+.video-cta__play {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(255,255,255,.22);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.video-cta__label { font-size: var(--fs-micro); letter-spacing: 1.4px; text-transform: uppercase; }
+
+/* ==========================================================================
+   Сегментный переключатель из трёх частей
+   Донор: «Why Choose us» на about_us — активный сегмент зелёный.
+   ========================================================================== */
+
+.segments {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-radius: var(--r-md); overflow: hidden;
+  box-shadow: var(--sh-card);
+  background: var(--white);
+}
+.segment {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 22px var(--s2);
+  font-size: var(--fs-sm); font-weight: 700; letter-spacing: .5px;
+  text-transform: uppercase; color: var(--ink);
+  border: 0; background: var(--surface-1); cursor: pointer;
+}
+.segment + .segment { border-left: 1px solid var(--line); }
+.segment:hover { color: var(--green-dark); }
+.segment[aria-selected="true"] { background: var(--green); color: var(--white); }
+@media (max-width: 768px) { .segments { grid-template-columns: 1fr; } .segment + .segment { border-left: 0; border-top: 1px solid var(--line); } }

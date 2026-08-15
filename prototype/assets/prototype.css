@@ -1,0 +1,85 @@
+/* ==========================================================================
+   Служебный слой прототипа: переключатель роли и аннотации.
+   Это ЛЕСА, а не часть сайта. Один файл — чтобы его можно было
+   выбросить целиком, ничего больше не трогая.
+   ========================================================================== */
+
+.pbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 200;
+  display: flex; align-items: center; gap: var(--s3);
+  padding: 10px 18px;
+  background: #17202A; color: rgba(255,255,255,.8);
+  font-family: var(--font); font-size: 12px; line-height: 16px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,.25);
+  flex-wrap: wrap;
+}
+.pbar__label { text-transform: uppercase; letter-spacing: .8px; color: rgba(255,255,255,.45); font-size: 10px; }
+.pbar__group { display: flex; align-items: center; gap: 8px; }
+.pbar__btn {
+  padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2);
+  background: transparent; color: rgba(255,255,255,.8);
+  font-family: inherit; font-size: 12px; cursor: pointer; white-space: nowrap;
+}
+.pbar__btn:hover { border-color: #81C408; color: #fff; }
+.pbar__btn[aria-pressed="true"] { background: #81C408; border-color: #81C408; color: #fff; font-weight: 700; }
+.pbar__spacer { flex: 1; }
+.pbar__home { color: rgba(255,255,255,.55); }
+.pbar__home:hover { color: #81C408; }
+body { padding-bottom: 54px; }
+@media (max-width: 768px) {
+  .pbar { font-size: 11px; gap: var(--s2); padding: 8px 12px; }
+  .pbar__hide-sm { display: none; }
+}
+
+/* --- Аннотации Что / Как / Зачем ----------------------------------------- */
+
+.ann-mark {
+  position: absolute; top: 8px; right: 8px; z-index: 30;
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 0; background: #17202A; color: #fff;
+  font-family: var(--font); font-size: 13px; line-height: 26px; text-align: center;
+  cursor: pointer; opacity: .55;
+}
+.ann-mark:hover { opacity: 1; background: #81C408; }
+.ann-host { position: relative; }
+
+.ann-panel {
+  border-left: 4px solid #17202A;
+  background: #F3F5F7;
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  padding: 20px 24px;
+  margin: var(--s2) 0 var(--s3);
+  font-size: 14px; line-height: 21px; color: #35414D;
+}
+.ann-panel h4 {
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  color: #7A8896; margin: 0 0 10px; font-weight: 700;
+}
+.ann-panel dl { display: grid; grid-template-columns: 68px 1fr; gap: 6px var(--s2); margin: 0; }
+.ann-panel dt { font-weight: 700; color: #17202A; }
+.ann-panel dd { margin: 0; }
+.ann-panel__src { margin-top: 12px; font-size: 12px; color: #7A8896; }
+
+body:not(.ann-on) .ann-panel { display: none; }
+body:not(.ann-on) .ann-mark { display: none; }
+
+/* Указатель прототипа (index.html) */
+.pindex { padding: var(--s5) 0 var(--s6); }
+.pindex__group { margin-bottom: var(--s5); }
+.pindex__group h2 { margin-bottom: var(--s2); }
+.pindex__lead { margin-bottom: var(--s3); max-width: 84ch; }
+.pindex__list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--s2); }
+.pindex__item {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 16px 20px; border: 1px solid var(--line-strong); border-radius: var(--r-md);
+  color: var(--ink);
+}
+.pindex__item:hover { border-color: var(--green); text-decoration: none; box-shadow: var(--sh-card); }
+.pindex__name { font-weight: 700; }
+.pindex__url { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--muted); }
+.pindex__note { font-size: var(--fs-caption); color: var(--body); }
+.pindex__states { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pindex__state {
+  font-size: 10px; text-transform: uppercase; letter-spacing: .6px;
+  padding: 3px 8px; border-radius: 999px; background: var(--surface-1); color: var(--ink-strong);
+}

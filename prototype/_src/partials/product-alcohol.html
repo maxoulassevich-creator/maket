@@ -1,0 +1,58 @@
+<!-- Алкогольная плитка. ДВА состояния — расхождение ТЗ 21.1 и «Структуры»
+     разрешено в пользу ТЗ (см. docs/04-пробелы.md, п. 4.5).
+     Гость и заявитель: кнопок покупки нет в разметке, цена как справка.
+     Подтверждённый оптовик: товар с признаком доступности оптового заказа
+     можно положить в корзину; плашка меняет формулировку. -->
+<article class="product">
+  <div class="product__media">
+    <div class="product__badges">
+      <span class="tag">{{cat}}</span>
+      <span class="tag tag--dark">18+</span>
+    </div>
+    <img src="assets/products/{{img}}" alt="{{name}}" loading="lazy">
+  </div>
+  <div class="product__body">
+    <p class="product__origin">{{country}} · {{maker}}</p>
+    <h3 class="product__name"><a href="product-alcohol.html">{{name}}</a></h3>
+
+    <template data-role-only="guest applicant">
+      <div class="price">
+        <span class="price__value">{{price}}</span>
+        <span class="price__unit">за {{unit}} · цена справочно</span>
+      </div>
+    </template>
+    <template data-role-only="wholesale">
+      <div class="price-pair">
+        <div class="price price--retail">
+          <span class="price__value">{{price}}</span>
+          <span class="price__unit">розница за {{unit}}</span>
+        </div>
+        <div class="price price--personal">
+          <span class="price__value">{{wprice}}</span>
+          <span class="price__unit">ваша цена за {{unit}}</span>
+        </div>
+      </div>
+    </template>
+
+    <div class="product__foot">
+      <template data-role-only="guest applicant">
+        <span class="product__restriction">
+          Дистанционная продажа не осуществляется. Товар доступен для приобретения только в магазине.
+        </span>
+      </template>
+      <template data-role-only="wholesale">
+        <div class="product__buy u-mb2">
+          <div class="qty" data-step="1" data-min="1">
+            <button type="button" data-qty="down" aria-label="Меньше">−</button>
+            <span class="qty__value">1</span>
+            <button type="button" data-qty="up" aria-label="Больше">+</button>
+          </div>
+          <button class="btn btn--primary" type="button">В корзину</button>
+        </div>
+        <span class="product__restriction">
+          Оптовый заказ, самовывоз со склада. Онлайн-оплаты нет — придёт счёт на предоплату.
+        </span>
+      </template>
+    </div>
+  </div>
+</article>

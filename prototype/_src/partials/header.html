@@ -1,0 +1,101 @@
+<!-- Шапка. Три состояния роли. Разметка для чужой роли лежит в <template>
+     и в DOM не попадает — это не CSS-скрытие (ТЗ 4.1). -->
+<header class="header">
+  <div class="container header__main">
+    <a class="logo" href="index.html">
+      <span class="logo__name">Food<b>beer</b></span>
+      <span class="logo__tag">гастромаркет</span>
+    </a>
+
+    <div style="position:relative">
+      <button class="header__catalog" type="button" data-catalog-toggle aria-haspopup="true">
+        ☰ <span>Каталог</span>
+      </button>
+      <div class="catalog-menu" data-catalog-menu hidden>
+        <div class="catalog-menu__grid">
+          <a class="catalog-menu__item" href="category.html">Сыры <span class="catalog-menu__count">44</span></a>
+          <a class="catalog-menu__item" href="category.html">Мясные деликатесы <span class="catalog-menu__count">38</span></a>
+          <a class="catalog-menu__item" href="category.html">Рыбные деликатесы <span class="catalog-menu__count">21</span></a>
+          <a class="catalog-menu__item" href="category.html">Закуски и антипасти <span class="catalog-menu__count">52</span></a>
+          <a class="catalog-menu__item" href="category.html">Десерты и сладости <span class="catalog-menu__count">33</span></a>
+          <a class="catalog-menu__item" href="category.html">Чай, кофе и бакалея <span class="catalog-menu__count">29</span></a>
+          <a class="catalog-menu__item" href="category.html">Безалкогольные напитки <span class="catalog-menu__count">18</span></a>
+          <a class="catalog-menu__item" href="gifts.html">Подарки и наборы <span class="catalog-menu__count">12</span></a>
+          <a class="catalog-menu__item" href="alcohol.html">Алкогольная витрина <span class="catalog-menu__count">26</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="search">
+      <label class="u-sr" for="q">Поиск по каталогу</label>
+      <input class="search__input" id="q" type="search" placeholder="Пармезан, хамон, тоник…" data-search-input>
+      <button class="search__submit" type="button" aria-label="Найти">🔍</button>
+      <div class="search__suggest" data-search-suggest hidden>
+        <div class="search__group">Товары</div>
+        <a class="search__row" href="product.html">
+          <span class="search__row-name">Пармиджано Реджано 24 мес.</span>
+          <span class="search__row-price">от 690 ₽ / 100 г</span>
+        </a>
+        <a class="search__row" href="product.html">
+          <span class="search__row-name">Хамон Серрано, нарезка</span>
+          <span class="search__row-price">от 540 ₽ / 100 г</span>
+        </a>
+        <div class="search__group">Категории</div>
+        <a class="search__row" href="category.html"><span class="search__row-name">Сыры</span>
+          <span class="search__row-price">44 позиции</span></a>
+      </div>
+    </div>
+
+    <div class="header__user">
+      <!-- ГОСТЬ -->
+      <template data-role-only="guest">
+        <div class="user-guest">
+          <a class="btn btn--secondary btn--sm" href="login.html">Войти</a>
+          <a class="btn btn--primary btn--sm" href="wholesale.html">Опт</a>
+        </div>
+      </template>
+
+      <!-- ЗАЯВИТЕЛЬ: видит состояние своей заявки -->
+      <template data-role-only="applicant">
+        <a class="user-applicant" href="wholesale-status.html">
+          <span class="status-big__dot" style="width:10px;height:10px;flex:0 0 10px;background:var(--warn)"></span>
+          <span>
+            <span class="user-applicant__label">Заявка на опт</span>
+            <span class="user-applicant__state">На проверке</span>
+          </span>
+        </a>
+      </template>
+
+      <!-- ПОДТВЕРЖДЁННЫЙ ОПТОВИК: организация, скидка, корзина с суммой -->
+      <template data-role-only="wholesale">
+        <div class="user-wholesale">
+          <a class="user-wholesale__org" href="account.html" style="text-decoration:none">
+            <span class="user-wholesale__name">ООО «Траттория»</span>
+            <span class="user-wholesale__discount">персональная скидка 12 %</span>
+          </a>
+          <a class="mini-cart" href="cart.html">
+            🧺 <span class="mini-cart__sum">48 250 ₽</span>
+            <span class="mini-cart__count">7</span>
+          </a>
+        </div>
+      </template>
+    </div>
+  </div>
+
+  <nav class="header__nav" aria-label="Основное меню">
+    <div class="container header__nav-inner">
+      <a href="index.html">Все страницы</a>
+      <a href="home.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="promotions.html">Акции</a>
+      <a href="new.html">Новинки</a>
+      <a href="gifts.html">Подарочные наборы</a>
+      <a href="second-floor.html">Второй этаж</a>
+      <a href="journal.html">Журнал</a>
+      <a href="about.html">О гастромаркете</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="wholesale.html" data-role-hide="wholesale">Оптовым покупателям</a>
+      <template data-role-only="wholesale"><a href="account.html">Личный кабинет</a></template>
+    </div>
+  </nav>
+</header>

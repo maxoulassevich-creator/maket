@@ -1,0 +1,399 @@
+<!--meta
+{"title":"Главная","url":"/","group":"Публичная витрина","order":10,
+ "note":"Первый экран с живым счётчиком, полоса фактов, поступления, 9 категорий, подбор по задаче, акции, второй этаж, журнал, опт, Telegram, вопросы, контакты.",
+ "states":["гость","заявитель","оптовик","нет поступлений → «Часто берут»"]}
+-->
+
+<!-- ======================= ПЕРВЫЙ ЭКРАН ======================= -->
+<section class="section has-decor hero-oval">
+  <script class="ann" type="application/json">
+  {"section":"Первый экран",
+   "what":"Заголовок «Витрина, на которой только то, что сегодня лежит на полке», короткое пояснение, две кнопки — в каталог и к оптовым условиям — и живой счётчик: сколько позиций в наличии и когда обновлялись данные.",
+   "how":"Счётчик берётся из учётной системы. Если синхронизация давно не проходила, цифра скрывается и остаётся нейтральная формулировка без числа.",
+   "why":"Главное отличие магазина от сетевой розницы заявляется первой же фразой. Живая цифра доказывает утверждение, а не украшает его.",
+   "src":"«Структура», Главная"}
+  </script>
+
+  <div class="leaves" aria-hidden="true">
+    <span class="leaf-tl"><img src="assets/decor/leaf-mint.png" alt=""></span>
+    <span class="leaf-br"><img src="assets/decor/leaf-mint.png" alt=""></span>
+  </div>
+
+  <div class="container">
+    <div class="grid grid-2" style="align-items:center">
+      <div>
+        <span class="brush">Гастромаркет · Волгоград</span>
+        <h1 style="font-size:var(--fs-display);line-height:var(--lh-display);margin:var(--s3) 0 var(--s2)">
+          Витрина, на которой только&nbsp;то, что <span class="u-green">сегодня лежит на полке</span>
+        </h1>
+        <p class="u-lead u-mb4" style="max-width:52ch">
+          Мы не держим позиции ради длины прайса и не показываем то, чего нет.
+          Всё, что вы видите на сайте, стоит в зале прямо сейчас — можно прийти и забрать.
+        </p>
+
+        <div style="display:flex;gap:var(--s2);flex-wrap:wrap" class="u-mb4">
+          <a class="btn btn--primary btn--lg" href="catalog.html">Смотреть каталог →</a>
+          <a class="btn btn--secondary btn--lg" href="wholesale.html" data-role-hide="wholesale">Оптовые условия</a>
+          <template data-role-only="wholesale">
+            <a class="btn btn--secondary btn--lg" href="account.html">Личный кабинет</a>
+          </template>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="fact__value">273</span>
+            <span class="fact__label">позиции в наличии прямо сейчас</span>
+          </div>
+          <div class="fact">
+            <span class="fact__value">14:20</span>
+            <span class="fact__label">данные обновлены сегодня</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ph ph--4x3" style="border-radius:var(--r-lg)">
+        Фотография витрины<br>предоставляет магазин
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ПОЛОСА ФАКТОВ ======================= -->
+<section class="section section--tight band band--cool band--round-l">
+  <script class="ann" type="application/json">
+  {"section":"Полоса фактов",
+   "what":"Три коротких утверждения: сколько позиций реально на полке, сколько позиций «под заказ» (ноль), и что на втором этаже можно попробовать купленное.",
+   "how":"Каждое утверждение — одно число или одно слово плюс пояснение в строку. Ничего декоративного.",
+   "why":"Посетитель за три секунды понимает правила игры: доставки нет, витрина честная, попробовать можно на месте.",
+   "src":"«Структура», Главная"}
+  </script>
+  <div class="container">
+    <div class="grid grid-3">
+      <div class="fact">
+        <span class="fact__value">273</span>
+        <span class="fact__label">позиции реально стоят на полке — ровно столько, сколько показано на сайте</span>
+      </div>
+      <div class="fact">
+        <span class="fact__value">0</span>
+        <span class="fact__label">позиций «под заказ» в публичной витрине: показываем только то, что есть</span>
+      </div>
+      <div class="fact">
+        <span class="fact__value">2 этаж</span>
+        <span class="fact__label">купленное внизу можно попробовать наверху — место есть всегда</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= КОРОТКО ======================= -->
+<section class="section section--tight">
+  <script class="ann" type="application/json">
+  {"section":"Блок «Коротко»",
+   "what":"Абзац на 40–70 слов сразу под заголовком, отвечающий на главный вопрос страницы.",
+   "how":"Начинается с полного названия предмета, а не с местоимения. Не содержит рекламных превосходных степеней. Присутствует в исходном коде страницы, а не подгружается скриптом.",
+   "why":"Это тот фрагмент, который поисковые и генеративные системы забирают в прямой ответ. Пока он самодостаточен и содержит проверяемые числа, страница может цитироваться; иначе — нет.",
+   "src":"«Структура», сквозная секция"}
+  </script>
+  <div class="container">
+    <p class="brief">
+      Foodbeer — гастромаркет в Волгограде: 273 позиции в наличии, девять категорий
+      от сыров и мясных деликатесов до алкогольной витрины. Сайт работает как
+      информационная витрина: цены и остатки приходят из учётной системы, дистанционный
+      заказ для частных лиц не оформляется — товар забирают в магазине. Подтверждённые
+      оптовые покупатели получают персональные цены, корзину и счёт на предоплату.
+    </p>
+  </div>
+</section>
+
+<!-- ======================= ПРИВЕЗЛИ НА ЭТОЙ НЕДЕЛЕ ======================= -->
+<section class="section section--food-pattern">
+  <script class="ann" type="application/json">
+  {"section":"Привезли на этой неделе",
+   "what":"Лента последних поступлений с датой приёмки у каждой позиции.",
+   "how":"Если за две недели поступлений не было, блок заменяется на «Часто берут», а не показывается пустым.",
+   "why":"Даёт повод вернуться на сайт тем, кто уже покупал. Дата у товара показывает, что витрина обновляется, — это видно и посетителю, и поисковым системам.",
+   "src":"«Структура», Главная"}
+  </script>
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        <span class="eyebrow">Поступления</span>
+        <h2>Привезли на этой неделе</h2>
+      </div>
+      <a class="btn btn--secondary" href="new.html">Все поступления →</a>
+    </div>
+
+    <div class="grid grid-4">
+      {{> product img="01-syry/syr-s-tryufelem.png" cat="Сыры" name="Качотта с трюфелем" country="Италия" maker="Caseificio Umbra" price="740 ₽" wprice="651 ₽" unit="100 г" badge="12 августа" badgetone="green" }}
+      {{> product img="02-myasnye-delikatesy/prshutto-narezka.png" cat="Мясные деликатесы" name="Прошутто ди Парма, нарезка" country="Италия" maker="Parma Food" price="590 ₽" wprice="519 ₽" unit="100 г" badge="12 августа" badgetone="green" }}
+      {{> product img="03-rybnye-delikatesy/losos-file.png" cat="Рыбные деликатесы" name="Лосось слабосолёный, филе" country="Фарерские о-ва" maker="Bakkafrost" price="420 ₽" wprice="370 ₽" unit="100 г" badge="14 августа" badgetone="green" }}
+      {{> product img="04-zakuski-i-antipasti/tomaty-vyalenye.png" cat="Закуски и антипасти" name="Томаты вяленые в масле" country="Италия" maker="La Dispensa" price="280 ₽" wprice="246 ₽" unit="100 г" badge="14 августа" badgetone="green" }}
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ПЛИТКИ КАТЕГОРИЙ ======================= -->
+<section class="section">
+  <script class="ann" type="application/json">
+  {"section":"Плитки категорий",
+   "what":"Девять категорий с количеством позиций и ценой «от».",
+   "how":"Числа живые, из тех же данных, что и каталог.",
+   "why":"Числа вместо картинок с надписями сразу показывают, где ассортимент глубокий, и уводят в нужный раздел за один переход.",
+   "src":"«Структура», Главная"}
+  </script>
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Каталог</span>
+      <h2>Девять категорий витрины</h2>
+    </div>
+    {{> cat-tiles }}
+  </div>
+</section>
+
+<!-- ======================= ПОДБОР ПО ЗАДАЧЕ ======================= -->
+<section class="section section--topo">
+  <script class="ann" type="application/json">
+  {"section":"Подбор по задаче",
+   "what":"Готовые сценарии вместо категорий: «Сырная тарелка на четверых», «К вечеру с друзьями», «Гастрономический подарок» — с составом и итоговой ценой.",
+   "how":"Состав собирается из позиций в наличии и пересобирается сам, если что-то закончилось.",
+   "why":"Половина посетителей не знает названий сортов и ищет решение задачи, а не продукт. Категории им не помогают, сценарии — помогают.",
+   "src":"«Структура», Главная"}
+  </script>
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Не знаете, с чего начать</span>
+      <h2>Подбор по задаче</h2>
+    </div>
+
+    <div class="grid grid-3">
+      <article class="card card--raised" style="background:var(--white)">
+        <h3 class="u-mb2">Сырная тарелка на четверых</h3>
+        <p class="u-mb2">Пять сортов по 100 г, от мягкого к выдержанному, плюс джем и крекеры.</p>
+        <ul class="u-mb3" style="font-size:var(--fs-sm)">
+          <li>Камамбер · 100 г</li>
+          <li>Качотта с трюфелем · 100 г</li>
+          <li>Пармиджано 24 мес. · 100 г</li>
+          <li>Горгонзола · 100 г</li>
+          <li>Джем и крекеры</li>
+        </ul>
+        <div class="price u-mb3">
+          <span class="price__value">2 340 ₽</span>
+          <span class="price__unit">за набор из 5 позиций</span>
+        </div>
+        <a class="btn btn--primary btn--block" href="category.html">Посмотреть состав →</a>
+      </article>
+
+      <article class="card card--raised">
+        <h3 class="u-mb2">К вечеру с друзьями</h3>
+        <p class="u-mb2">Мясная нарезка, антипасти и то, что к ним берут чаще всего.</p>
+        <ul class="u-mb3" style="font-size:var(--fs-sm)">
+          <li>Прошутто · 150 г</li>
+          <li>Салями · 150 г</li>
+          <li>Оливки и вяленые томаты</li>
+          <li>Хлебные палочки</li>
+          <li>Тоник и лимонад</li>
+        </ul>
+        <div class="price u-mb3">
+          <span class="price__value">1 980 ₽</span>
+          <span class="price__unit">за набор из 5 позиций</span>
+        </div>
+        <a class="btn btn--primary btn--block" href="category.html">Посмотреть состав →</a>
+      </article>
+
+      <article class="card card--raised">
+        <h3 class="u-mb2">Гастрономический подарок</h3>
+        <p class="u-mb2">Коробка с раскрытым составом — видно, за что платите.</p>
+        <ul class="u-mb3" style="font-size:var(--fs-sm)">
+          <li>Пармиджано 24 мес. · 200 г</li>
+          <li>Салями · 150 г</li>
+          <li>Оливковое масло · 250 мл</li>
+          <li>Джем · 200 г</li>
+          <li>Подарочная коробка</li>
+        </ul>
+        <div class="price u-mb3">
+          <span class="price__value">3 450 ₽</span>
+          <span class="price__unit">за набор</span>
+        </div>
+        <a class="btn btn--primary btn--block" href="gifts.html">Посмотреть состав →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ДЕЙСТВУЮЩИЕ АКЦИИ ======================= -->
+<section class="section">
+  <script class="ann" type="application/json">
+  {"section":"Действующие акции",
+   "what":"Карточки акций со сроком и обратным отсчётом.",
+   "how":"Если действующих акций нет, секция скрывается целиком — заглушка не выводится.",
+   "why":"Срок рядом с предложением создаёт причину прийти сейчас и снимает вопрос «а до какого числа».",
+   "src":"«Структура», Главная"}
+  </script>
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        <span class="eyebrow">Ограничено по времени</span>
+        <h2>Действующие акции</h2>
+      </div>
+      <a class="btn btn--secondary" href="promotions.html">Все акции →</a>
+    </div>
+
+    <div class="grid grid-2">
+      <article class="card card--raised media-row">
+        <div class="ph ph--1x1" style="min-height:0">Изображение акции</div>
+        <div>
+          <span class="tag tag--danger u-mb2" style="display:inline-flex">−15 %</span>
+          <h3 class="u-mb2">Хамон Серрано — 15 % до конца недели</h3>
+          <p class="u-mb3" style="font-size:var(--fs-sm)">С 11 по 17 августа 2026. Скидка применяется в чеке автоматически.</p>
+          <div class="countdown u-mb3">
+            <span class="countdown__cell"><span class="countdown__num">2</span><span class="countdown__label">дня</span></span>
+            <span class="countdown__cell"><span class="countdown__num">06</span><span class="countdown__label">часов</span></span>
+            <span class="countdown__cell"><span class="countdown__num">25</span><span class="countdown__label">мин</span></span>
+          </div>
+          <a class="btn btn--primary btn--sm" href="promotion.html">Условия акции →</a>
+        </div>
+      </article>
+
+      <article class="card card--raised media-row">
+        <div class="ph ph--1x1" style="min-height:0">Изображение акции</div>
+        <div>
+          <span class="tag tag--danger u-mb2" style="display:inline-flex">−10 %</span>
+          <h3 class="u-mb2">Три сыра из витрины — 10 % на третий</h3>
+          <p class="u-mb3" style="font-size:var(--fs-sm)">С 5 по 31 августа 2026. Скидка на позицию наименьшей стоимости.</p>
+          <div class="countdown u-mb3">
+            <span class="countdown__cell"><span class="countdown__num">16</span><span class="countdown__label">дней</span></span>
+            <span class="countdown__cell"><span class="countdown__num">06</span><span class="countdown__label">часов</span></span>
+            <span class="countdown__cell"><span class="countdown__num">25</span><span class="countdown__label">мин</span></span>
+          </div>
+          <a class="btn btn--primary btn--sm" href="promotion.html">Условия акции →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ВТОРОЙ ЭТАЖ ======================= -->
+<section class="section has-decor">
+  <script class="ann" type="application/json">
+  {"section":"Второй этаж",
+   "what":"Крупный блок на фирменном зелёном поле: фотография зоны, объяснение формата, переход на подробную страницу.",
+   "how":"Единственный контрастный блок на странице.",
+   "why":"Формат «купил внизу — сел наверху» встречается редко, и объяснить его текстом в две строки нельзя. Блок выделен, потому что это главное отличие места.",
+   "src":"«Структура», Главная"}
+  </script>
+  <div class="container">
+    <div class="green-split" style="padding:var(--s5) 0">
+      <div class="grid grid-2" style="align-items:center">
+        <div style="color:#fff">
+          <span class="eyebrow" style="color:rgba(255,255,255,.85)">Главное отличие места</span>
+          <h2 style="color:#fff" class="u-mb3">Купили внизу — сели наверху</h2>
+          <p style="color:rgba(255,255,255,.92)" class="u-lead u-mb4">
+            На втором этаже можно сесть и попробовать то, что вы только что выбрали на витрине.
+            Ничего не нужно бронировать и ни за что не нужно доплачивать: выбираете внизу,
+            оплачиваете на кассе, поднимаетесь.
+          </p>
+          <a class="btn btn--secondary btn--lg" href="second-floor.html">Как это устроено →</a>
+        </div>
+        <div class="ph ph--4x3" style="border-radius:var(--r-lg)">
+          Фотография зоны второго этажа<br>предоставляет магазин
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= МАТЕРИАЛЫ ЖУРНАЛА ======================= -->
+<section class="section has-decor section--food-sides">
+  <script class="ann" type="application/json">
+  {"section":"Материалы журнала",
+   "what":"Три последние публикации с рубрикой и временем чтения.",
+   "how":"Наполняется из модуля публикаций автоматически. Черновики и материалы на согласовании в ленту не попадают ни при каких условиях.",
+   "why":"Показывает, что за витриной стоят люди, которые разбираются в продукте. Это работает на доверие лучше, чем раздел «о нас».",
+   "src":"«Структура», Главная"}
+  </script>
+  <span class="branch-tr" aria-hidden="true"></span>
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        <span class="eyebrow">Журнал</span>
+        <h2>Разбираемся в продукте</h2>
+      </div>
+      <a class="btn btn--secondary" href="journal.html">Все материалы →</a>
+    </div>
+
+    <div class="grid grid-3">
+      <article class="post">
+        <div class="ph post__media" style="border-radius:0">Изображение материала</div>
+        <div class="post__body">
+          <span class="tag" style="align-self:flex-start">Советы по выбору</span>
+          <h3 class="post__title"><a href="journal-post.html">Сырная тарелка на четверых: что взять и в каком порядке раскладывать</a></h3>
+          <p style="font-size:var(--fs-sm)">Пять сортов, 500 г на компанию, от мягкого к выдержанному — и почему именно так.</p>
+          <div class="post__meta"><span>12 августа</span><span>6 мин чтения</span></div>
+        </div>
+      </article>
+      <article class="post">
+        <div class="ph post__media" style="border-radius:0">Изображение материала</div>
+        <div class="post__body">
+          <span class="tag" style="align-self:flex-start">История продукта</span>
+          <h3 class="post__title"><a href="journal-post.html">Чем отличается выдержка 12, 24 и 36 месяцев</a></h3>
+          <p style="font-size:var(--fs-sm)">Что происходит с текстурой и вкусом и когда переплата за возраст осмысленна.</p>
+          <div class="post__meta"><span>8 августа</span><span>4 мин чтения</span></div>
+        </div>
+      </article>
+      <article class="post">
+        <div class="ph post__media" style="border-radius:0">Изображение материала</div>
+        <div class="post__body">
+          <span class="tag" style="align-self:flex-start">Рецепты и сочетания</span>
+          <h3 class="post__title"><a href="journal-post.html">Что взять к вину, если гости уже в дороге</a></h3>
+          <p style="font-size:var(--fs-sm)">Набор из четырёх позиций, который собирается за пять минут у витрины.</p>
+          <div class="post__meta"><span>2 августа</span><span>3 мин чтения</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+{{> wholesale-cta }}
+{{> telegram }}
+
+{{> faq title="О витрине и о том, как здесь всё устроено"
+        q1="Можно ли заказать доставку"
+        a1="Доставки нет. Foodbeer работает как витрина: сайт показывает, что стоит в зале прямо сейчас, а покупка происходит в магазине. Частным лицам сайт не оформляет заказ и не бронирует товар. Подтверждённые оптовые покупатели оформляют заказ в кабинете и забирают его со склада."
+        q2="Почему на сайте нет кнопки «Купить»"
+        a2="Потому что дистанционная продажа частным лицам не ведётся. Кнопки покупки нет не только на экране — её нет и в коде страницы. Сайт отвечает на вопрос «есть ли это сегодня и сколько стоит», а покупка происходит у прилавка."
+        q3="Насколько актуальны цены и остатки"
+        a3="Цены и остатки приходят из учётной системы 1С:УНФ по расписанию. Время последнего обновления указано в подвале каждой страницы и на первом экране. Позиции, которых нет в наличии, из публичной витрины исчезают, а не помечаются как отсутствующие."
+        q4="Что значит «цена за 100 г»"
+        a4="Часть позиций — весовые: сыры, мясные и рыбные деликатесы, нарезка. Для них цена указана за 100 граммов, и это написано рядом с числом. Для штучных позиций указано «за шт», для напитков — «за бутылку». Единица измерения стоит у цены всегда."
+        q5="Можно ли купить алкоголь на сайте"
+        a5="Нет. Дистанционная продажа алкогольной продукции не осуществляется — алкогольная витрина на сайте информационная, товар приобретается только в магазине. Подтверждённые оптовые покупатели могут оформить оптовый заказ на позиции, отмеченные как доступные для оптового заказа, со счётом на предоплату и самовывозом со склада." }}
+
+<!-- ======================= КОНТАКТЫ И КАРТА ======================= -->
+<section class="section section--cool">
+  <script class="ann" type="application/json">
+  {"section":"Контакты и карта",
+   "what":"Адрес, режим работы, кнопка маршрута и карта.",
+   "how":"Дублирует служебную полосу в развёрнутом виде.",
+   "why":"Значительная часть посетителей приходит на главную с одной целью — узнать, как доехать. Не заставляем их искать отдельную страницу.",
+   "src":"«Структура», Главная"}
+  </script>
+  <div class="container">
+    <div class="grid grid-2" style="align-items:center">
+      <div>
+        <span class="eyebrow">Как доехать</span>
+        <h2 class="u-mb3">Мы здесь</h2>
+        <table class="table table--spec u-mb3" style="max-width:460px">
+          <tr><th>Адрес</th><td>[заполняется перед запуском]</td></tr>
+          <tr><th>Режим работы</th><td>пн–вс, 10:00–21:00</td></tr>
+          <tr><th>Телефон</th><td>[заполняется]</td></tr>
+          <tr><th>Оптовый отдел</th><td>[заполняется]</td></tr>
+        </table>
+        <div style="display:flex;gap:var(--s2);flex-wrap:wrap">
+          <a class="btn btn--primary" href="contacts.html">Построить маршрут →</a>
+          <a class="btn btn--secondary" href="contacts.html">Все контакты</a>
+        </div>
+      </div>
+      <div class="ph ph--4x3" style="border-radius:var(--r-lg)">Карта</div>
+    </div>
+  </div>
+</section>

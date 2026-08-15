@@ -1,0 +1,820 @@
+/* ==========================================================================
+   Foodbeer — компоненты
+   Собраны из экземпляров, найденных в макете Organi. Состояния, которых
+   в исходнике нет (наведение, нажатие, блокировка, ошибка, пустое),
+   добавлены по требованиям ТЗ и «Структуры» — см. docs/02, п. 2.5.
+   ========================================================================== */
+
+/* ==========================================================================
+   Кнопки
+   Наблюдалось: 172×48, 183×51, 191×60, 200×56, 227×57 — трассировочный шум.
+   Нормализовано: обычная 48, крупная 56. Пилюля обязательна.
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 30px;
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s, box-shadow .15s;
+}
+.btn:hover { text-decoration: none; }
+
+.btn--primary { background: var(--green); color: var(--white); }
+.btn--primary:hover { background: var(--green-dark); color: var(--white); }
+.btn--primary:active { background: var(--green-dark); box-shadow: inset 0 2px 6px rgba(0,0,0,.2); }
+
+.btn--secondary { background: var(--white); color: var(--ink); border-color: var(--line-strong); }
+.btn--secondary:hover { border-color: var(--green); color: var(--green-dark); }
+
+.btn--dark { background: var(--ink); color: var(--white); }
+.btn--dark:hover { background: #000; color: var(--white); }
+
+.btn--ghost { background: transparent; color: var(--ink); padding: 0 6px; height: auto; }
+.btn--ghost:hover { color: var(--green-dark); }
+
+.btn--lg { height: 56px; padding: 0 40px; font-size: var(--fs-body-lg); }
+.btn--sm { height: 38px; padding: 0 20px; font-size: var(--fs-sm); }
+.btn--block { display: flex; width: 100%; }
+
+.btn[disabled],
+.btn--disabled {
+  background: var(--surface-grey);
+  color: var(--placeholder);
+  border-color: var(--surface-grey);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn--loading { position: relative; color: transparent !important; pointer-events: none; }
+.btn--loading::after {
+  content: '';
+  position: absolute;
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,.4);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: fb-spin .7s linear infinite;
+}
+@keyframes fb-spin { to { transform: rotate(360deg); } }
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.btn-icon:hover { background: var(--green); border-color: var(--green); color: var(--white); }
+.btn-icon--green { background: var(--green); border-color: var(--green); color: var(--white); }
+.btn-icon--lg { width: 60px; height: 60px; }
+
+/* ==========================================================================
+   Поля и формы
+   Состояний в Organi нет ни одного. Ошибка, обязательность, подсказка и
+   блокировка добавлены по «Структуре» (раздел «Формы») и ТЗ 13.1, 13.4.
+   ========================================================================== */
+
+.field { margin-bottom: var(--s3); }
+.field__label {
+  display: block;
+  margin-bottom: var(--s1);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink);
+}
+.field__label .req { color: var(--danger); margin-left: 3px; }
+
+.input, .select, .textarea {
+  width: 100%;
+  min-height: 56px;
+  padding: 15px 20px;
+  border: 1px solid var(--line-cool);
+  border-radius: var(--r-sm);
+  background: var(--white);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink);
+  transition: border-color .15s, box-shadow .15s;
+}
+.input::placeholder, .textarea::placeholder { color: var(--placeholder); }
+.input:hover, .select:hover, .textarea:hover { border-color: var(--muted); }
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(129, 196, 8, .15);
+}
+.textarea { min-height: 130px; resize: vertical; }
+.select {
+  appearance: none;
+  padding-right: 44px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236C747A' d='M1.4 0 6 4.6 10.6 0 12 1.4 6 7.4 0 1.4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  cursor: pointer;
+}
+
+.field__hint {
+  margin-top: 6px;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: var(--muted);
+}
+
+/* Ошибка стоит РЯДОМ с полем, а не общим списком сверху — «Структура», «Формы» */
+.field--error .input,
+.field--error .select,
+.field--error .textarea { border-color: var(--danger); background: var(--danger-bg); }
+.field__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: var(--danger);
+  font-weight: 500;
+}
+.field__error::before { content: '!'; flex: 0 0 14px; height: 14px; margin-top: 1px;
+  border-radius: 50%; background: var(--danger); color: #fff; font-size: 10px;
+  line-height: 14px; text-align: center; font-weight: 700; }
+
+.input[disabled], .select[disabled], .textarea[disabled] {
+  background: var(--surface-1);
+  color: var(--placeholder);
+  cursor: not-allowed;
+}
+.input[readonly] { background: var(--surface-1); color: var(--ink-strong); }
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: var(--s2);
+  font-size: var(--fs-sm);
+  line-height: 20px;
+  cursor: pointer;
+}
+.check input { flex: 0 0 16px; width: 16px; height: 16px; margin: 2px 0 0; accent-color: var(--green); }
+.check--error { color: var(--danger); }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+@media (max-width: 768px) { .field-row { grid-template-columns: 1fr; } }
+
+/* Счётчик количества — пилюля «− 2 +» */
+.qty {
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  background: var(--white);
+}
+.qty button {
+  width: 42px; height: 100%;
+  border: 0; background: none;
+  font-size: 18px; color: var(--ink-strong);
+  cursor: pointer;
+}
+.qty button:hover { color: var(--green); }
+.qty__value {
+  min-width: 62px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Плашки
+   В Organi нет ни одной информационной, предупреждающей или запрещающей
+   плашки. Все ниже введены по требованиям ТЗ 21.1, 15.3, 16.x
+   и «Структуры».
+   ========================================================================== */
+
+.notice {
+  display: flex;
+  gap: var(--s2);
+  padding: 20px 24px;
+  border-radius: var(--r-md);
+  border-left: 4px solid var(--neutral);
+  background: var(--neutral-bg);
+  font-size: var(--fs-body);
+  line-height: 23px;
+  color: var(--ink-strong);
+  margin-bottom: var(--s3);
+}
+.notice__icon { flex: 0 0 22px; font-size: 18px; line-height: 23px; }
+.notice__body { flex: 1; min-width: 0; }
+.notice__title { display: block; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.notice p:last-child { margin-bottom: 0; }
+
+.notice--info    { border-left-color: var(--neutral); background: var(--neutral-bg); }
+.notice--warn    { border-left-color: var(--warn);    background: var(--warn-bg); }
+.notice--danger  { border-left-color: var(--danger);  background: var(--danger-bg); }
+.notice--success { border-left-color: var(--success); background: var(--success-bg); }
+.notice--green   { border-left-color: var(--green);   background: var(--green-bg); }
+
+/* Плашка алкогольного ограничения. Две формулировки — публичная и оптовая. */
+.notice--alcohol {
+  border-left-color: var(--danger);
+  background: var(--danger-bg);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* Крупная плашка над кнопкой оформления — «Структура», /checkout/ */
+.notice--major {
+  padding: 26px 30px;
+  border-left-width: 6px;
+  font-size: var(--fs-body-lg);
+  line-height: 26px;
+}
+
+/* ==========================================================================
+   Статусы
+   «Цвет статуса никогда не единственный носитель смысла — рядом всегда
+   подпись». Поэтому статус — это всегда точка + текст, а не только цвет.
+   ========================================================================== */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px 5px 10px;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+  background: var(--neutral-bg);
+  color: var(--ink-strong);
+}
+.status::before {
+  content: '';
+  flex: 0 0 8px; width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--neutral);
+}
+.status--wait::before    { background: var(--warn); }
+.status--wait            { background: var(--warn-bg); }
+.status--work::before    { background: var(--green); }
+.status--work            { background: var(--green-bg); }
+.status--done::before    { background: var(--success); }
+.status--done            { background: var(--success-bg); }
+.status--cancel::before  { background: var(--danger); }
+.status--cancel          { background: var(--danger-bg); }
+
+/* Крупная отметка состояния — /wholesale/status/, /message/… */
+.status-big {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: 18px 30px;
+  border-radius: var(--r-pill);
+  background: var(--neutral-bg);
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--ink);
+}
+.status-big__dot { flex: 0 0 16px; width: 16px; height: 16px; border-radius: 50%; background: var(--neutral); }
+.status-big--wait   { background: var(--warn-bg); }
+.status-big--wait   .status-big__dot { background: var(--warn); }
+.status-big--done   { background: var(--success-bg); }
+.status-big--done   .status-big__dot { background: var(--success); }
+.status-big--cancel { background: var(--danger-bg); }
+.status-big--cancel .status-big__dot { background: var(--danger); }
+
+/* ==========================================================================
+   Метки
+   ========================================================================== */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  background: var(--surface-1);
+  font-size: var(--fs-micro);
+  line-height: var(--lh-micro);
+  font-weight: 500;
+  color: var(--ink-strong);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+.tag--green  { background: var(--green); color: var(--white); }
+.tag--danger { background: var(--danger); color: var(--white); }
+.tag--dark   { background: var(--ink); color: var(--white); }
+.tag--count  { text-transform: none; letter-spacing: 0; }
+.tag__count  { color: var(--muted); font-weight: 400; }
+.tag--green .tag__count { color: rgba(255,255,255,.75); }
+
+/* Метки-переключатели: подкатегории, фильтры по статусу, рубрики */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: var(--white);
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all .15s;
+}
+.chip:hover { border-color: var(--green); color: var(--green-dark); text-decoration: none; }
+.chip__count { color: var(--muted); font-size: var(--fs-caption); }
+.chip[aria-current="true"], .chip--active {
+  background: var(--green); border-color: var(--green); color: var(--white);
+}
+.chip--active .chip__count, .chip[aria-current="true"] .chip__count { color: rgba(255,255,255,.8); }
+
+/* Метка выбранного фильтра с быстрым сбросом */
+.chip--applied { background: var(--green-bg); border-color: var(--green); color: var(--ink); }
+.chip--applied button {
+  border: 0; background: none; cursor: pointer;
+  color: var(--ink-strong); font-size: 15px; line-height: 1; padding: 0;
+}
+.chip--applied button:hover { color: var(--danger); }
+
+/* ==========================================================================
+   Карточки
+   ========================================================================== */
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--s3);
+}
+.card--flat { border: 0; box-shadow: var(--sh-soft); }
+.card--raised { border: 0; box-shadow: var(--sh-card); }
+
+/* --- Плитка товара -------------------------------------------------------
+   Донор: карточка Organi 310×408, рамка 1px, радиус 10.
+   Три варианта по «Структуре»: публичная / оптовая / алкогольная.
+   Различие между ними — НЕ в стилях: в публичной и алкогольной
+   кнопок покупки нет в разметке вообще.
+   -------------------------------------------------------------------------- */
+
+.product {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition: border-color .18s, box-shadow .18s, transform .18s;
+}
+.product:hover { border-color: var(--green); box-shadow: var(--sh-card); transform: translateY(-3px); }
+
+.product__media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--surface-1);
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--s2);
+}
+.product__media img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.product__badges {
+  position: absolute; inset: 12px 12px auto 12px;
+  display: flex; justify-content: space-between; gap: var(--s1);
+  pointer-events: none;
+}
+.product__body { padding: 18px var(--s2) var(--s2); display: flex; flex-direction: column; flex: 1; gap: 6px; }
+.product__origin { font-size: var(--fs-caption); line-height: var(--lh-caption); color: var(--muted); }
+.product__name {
+  font-size: var(--fs-h3); line-height: 24px; font-weight: 700; color: var(--ink);
+  margin: 0;
+}
+.product__name a { color: inherit; }
+.product__name a:hover { color: var(--green-dark); text-decoration: none; }
+
+/* Цена ВСЕГДА с единицей измерения. Единица — не украшение, а часть цены. */
+.price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.price__value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-h3); line-height: 24px; font-weight: 700;
+  color: var(--green);
+}
+.price__unit { font-size: var(--fs-caption); line-height: 16px; color: var(--ink-strong); }
+.price__old {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm); color: var(--muted); text-decoration: line-through;
+}
+.price--retail .price__value { color: var(--muted); font-weight: 400; text-decoration: line-through; font-size: var(--fs-sm); }
+.price--personal .price__value { color: var(--green); }
+
+.price-pair { display: flex; flex-direction: column; gap: 2px; }
+.price-pair__label { font-size: var(--fs-micro); color: var(--muted); }
+
+.product__stock { display: flex; align-items: center; gap: 6px; font-size: var(--fs-caption); }
+.product__stock::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--success); }
+.product__stock--order::before { background: var(--warn); }
+.product__foot { margin-top: auto; padding-top: 12px; }
+
+/* Публичная плитка: единственное действие — переход в карточку */
+.product__more {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--fs-sm); font-weight: 500; color: var(--ink-strong);
+}
+.product__more:hover { color: var(--green-dark); text-decoration: none; }
+
+/* Оптовая плитка: количество + «В корзину» */
+.product__buy { display: flex; gap: 10px; align-items: center; }
+.product__buy .qty { height: 42px; flex: 0 0 auto; }
+.product__buy .qty button { width: 34px; }
+.product__buy .qty__value { min-width: 46px; }
+.product__buy .btn { flex: 1; height: 42px; padding: 0 14px; font-size: var(--fs-sm); }
+
+/* Алкогольная плитка: плашка вместо действия */
+.product__restriction {
+  display: block;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  background: var(--danger-bg);
+  border-left: 3px solid var(--danger);
+  font-size: var(--fs-caption);
+  line-height: 16px;
+  color: var(--ink);
+}
+
+/* --- Плитка категории ---------------------------------------------------- */
+.cat-tile {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 14px; padding: var(--s3) var(--s2);
+  border-radius: var(--r-md);
+  background: var(--white);
+  border: 1px solid transparent;
+  transition: border-color .18s, box-shadow .18s, transform .18s;
+}
+.cat-tile:hover { border-color: var(--green); box-shadow: var(--sh-card); transform: translateY(-3px); text-decoration: none; }
+.cat-tile__media {
+  width: 180px; height: 180px; border-radius: 50%;
+  background: var(--surface-1);
+  display: flex; align-items: center; justify-content: center;
+  padding: 22px;
+}
+.cat-tile__media img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.cat-tile__name { font-size: var(--fs-h3); font-weight: 700; color: var(--ink); }
+.cat-tile__meta { font-size: var(--fs-caption); color: var(--muted); }
+.cat-tile__meta b { color: var(--ink-strong); font-weight: 500; font-family: var(--font-mono); }
+
+/* --- Карточка статьи ----------------------------------------------------- */
+.post {
+  display: flex; flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition: box-shadow .18s, transform .18s;
+}
+.post:hover { box-shadow: var(--sh-card); transform: translateY(-3px); }
+.post__media { aspect-ratio: 16 / 10; background: var(--surface-1); }
+.post__body { padding: var(--s3); display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.post__title { font-size: var(--fs-h3); line-height: 26px; font-weight: 700; }
+.post__meta { display: flex; flex-wrap: wrap; gap: var(--s2); font-size: var(--fs-caption); color: var(--muted); }
+
+/* --- Карточка-шаг 01/02/03. Донор: about_us_2 ---------------------------- */
+.steps { display: grid; gap: var(--s3); }
+.steps--4 { grid-template-columns: repeat(4, 1fr); }
+.steps--3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 992px) { .steps--4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 576px) { .steps--4, .steps--3 { grid-template-columns: 1fr; } }
+
+.step {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-card);
+  padding: var(--s3);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.step__num {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--green); color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-weight: 700; font-size: var(--fs-body);
+}
+.step__title { font-size: var(--fs-h4); font-weight: 700; color: var(--ink); }
+.step__term { font-size: var(--fs-caption); color: var(--green-dark); font-weight: 500; }
+
+/* --- Шаги оформления (корзина → оформление → счёт) ----------------------- */
+.progress { display: flex; align-items: center; gap: var(--s2); margin-bottom: var(--s4); flex-wrap: wrap; }
+.progress__item { display: flex; align-items: center; gap: 10px; font-size: var(--fs-sm); color: var(--muted); }
+.progress__num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--surface-grey); color: var(--ink-strong);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: var(--fs-caption); font-weight: 700;
+}
+.progress__item--active { color: var(--ink); font-weight: 700; }
+.progress__item--active .progress__num { background: var(--green); color: var(--white); }
+.progress__item--done .progress__num { background: var(--success); color: var(--white); }
+.progress__sep { flex: 0 0 40px; height: 1px; background: var(--line-strong); }
+
+/* --- Шкала статусов заказа ----------------------------------------------- */
+.track { display: flex; gap: 0; margin-bottom: var(--s3); }
+.track__step { flex: 1; position: relative; padding-top: 26px; font-size: var(--fs-caption); color: var(--muted); }
+.track__step::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--surface-grey);
+}
+.track__step:first-child::before { border-radius: var(--r-pill) 0 0 var(--r-pill); }
+.track__step:last-child::before { border-radius: 0 var(--r-pill) var(--r-pill) 0; }
+.track__step--done::before { background: var(--success); }
+.track__step--current::before { background: var(--green); }
+.track__step--current { color: var(--ink); font-weight: 700; }
+@media (max-width: 768px) { .track { flex-direction: column; gap: 10px; }
+  .track__step { padding-top: 0; padding-left: 20px; }
+  .track__step::before { top: 4px; left: 0; right: auto; width: 4px; height: 100%; border-radius: var(--r-pill); } }
+
+/* ==========================================================================
+   Таблицы
+   «Числа выравниваются по правому краю и набираются моноширинно, шапка
+   таблицы липкая, на телефоне строки перестраиваются в карточки.»
+   ========================================================================== */
+
+.table-wrap { overflow-x: auto; border-radius: var(--r-md); border: 1px solid var(--line); }
+
+.table { width: 100%; border-collapse: collapse; background: var(--white); font-size: var(--fs-sm); }
+.table th, .table td { padding: 16px 18px; text-align: left; vertical-align: middle; }
+.table thead th {
+  position: sticky; top: 0; z-index: 2;
+  background: var(--surface-1);
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  color: var(--ink-strong);
+  white-space: nowrap;
+}
+.table tbody tr + tr { border-top: 1px solid var(--line); }
+.table tbody tr:hover { background: var(--surface-1); }
+.table td.num, .table th.num {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.table tfoot td { border-top: 2px solid var(--line-strong); font-weight: 700; color: var(--ink); }
+.table__name { font-weight: 700; color: var(--ink); }
+.table__sub { font-size: var(--fs-caption); color: var(--muted); }
+.table--fixed { table-layout: fixed; }
+
+/* Таблица «параметр → значение». Донор: «Nutritional Values» */
+.table--spec th { width: 38%; background: var(--surface-1); font-weight: 500; text-transform: none;
+  letter-spacing: 0; font-size: var(--fs-sm); color: var(--ink-strong); position: static; }
+.table--spec td { color: var(--ink); }
+
+/* Таблица «параметры × объекты». Донор: compare_page */
+.table--matrix thead th:first-child { width: 26%; }
+.table--matrix td { color: var(--ink-strong); }
+
+/* На телефоне строки становятся карточками */
+@media (max-width: 768px) {
+  .table--cards, .table--cards thead, .table--cards tbody,
+  .table--cards th, .table--cards td, .table--cards tr { display: block; }
+  .table--cards thead { position: absolute; left: -9999px; }
+  .table--cards tbody tr {
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: var(--s2);
+    margin-bottom: var(--s2);
+  }
+  .table--cards tbody tr + tr { border-top: 1px solid var(--line); }
+  .table--cards td {
+    display: flex; justify-content: space-between; gap: var(--s2);
+    padding: 7px 0; text-align: right;
+  }
+  .table--cards td::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    font-size: var(--fs-caption);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--muted);
+    text-align: left;
+  }
+  .table-wrap { border: 0; overflow: visible; }
+}
+
+/* ==========================================================================
+   Аккордеон. Донор: Faqs (светлый вариант)
+   ========================================================================== */
+
+.accordion { border: 1px solid var(--line-strong); border-radius: var(--r-md); overflow: hidden; }
+.accordion__item + .accordion__item { border-top: 1px solid var(--line-strong); }
+.accordion__head {
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s2);
+  padding: 22px 26px;
+  border: 0; background: var(--white);
+  font-family: var(--font);
+  font-size: var(--fs-h4); font-weight: 700; line-height: 24px;
+  color: var(--ink); text-align: left; cursor: pointer;
+}
+.accordion__head:hover { color: var(--green-dark); }
+.accordion__head::after { content: '⌄'; font-size: 20px; line-height: 1; transition: transform .2s; flex: 0 0 auto; }
+.accordion__item[open] .accordion__head { color: var(--green-dark); }
+.accordion__item[open] .accordion__head::after { transform: rotate(180deg); }
+.accordion__body { padding: 0 26px 24px; font-size: var(--fs-body); line-height: 25px; max-width: 78ch; }
+.accordion__item summary::-webkit-details-marker { display: none; }
+
+/* ==========================================================================
+   Хлебные крошки, пагинация, вкладки
+   ========================================================================== */
+
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: var(--fs-sm); }
+.crumbs a { color: rgba(255,255,255,.75); }
+.crumbs a:hover { color: var(--white); }
+.crumbs__sep { color: rgba(255,255,255,.4); }
+.crumbs [aria-current] { color: var(--white); }
+@media (max-width: 576px) { .crumbs__hide-sm { display: none; } }
+
+.pagination { display: flex; gap: 10px; justify-content: center; align-items: center; margin-top: var(--s4); }
+.pagination a, .pagination span {
+  min-width: 42px; height: 42px; padding: 0 12px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line-strong); border-radius: var(--r-sm);
+  font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--ink);
+}
+.pagination a:hover { border-color: var(--green); color: var(--green-dark); text-decoration: none; }
+.pagination [aria-current] { background: var(--green); border-color: var(--green); color: var(--white); }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: var(--s3); }
+.tab {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 44px; padding: 0 24px;
+  border: 1px solid var(--line-strong); border-radius: var(--r-pill);
+  background: var(--white); font-size: var(--fs-sm); color: var(--ink); cursor: pointer;
+}
+.tab:hover { border-color: var(--green); text-decoration: none; }
+.tab[aria-selected="true"] { background: var(--green); border-color: var(--green); color: var(--white); font-weight: 700; }
+.tab__count { color: var(--muted); }
+.tab[aria-selected="true"] .tab__count { color: rgba(255,255,255,.8); }
+
+/* ==========================================================================
+   Пустые состояния
+   «Каждое состояние называет причину и предлагает следующий шаг.»
+   ========================================================================== */
+
+.empty {
+  text-align: center;
+  padding: var(--s6) var(--s3);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+}
+.empty__icon {
+  width: 72px; height: 72px; margin: 0 auto var(--s3);
+  border-radius: 50%; background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; box-shadow: var(--sh-soft);
+}
+.empty__title { font-size: var(--fs-h3); font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.empty__text { max-width: 52ch; margin: 0 auto var(--s3); }
+
+/* ==========================================================================
+   Блок «Коротко» — абзац 40–70 слов сразу под заголовком
+   ========================================================================== */
+
+.brief {
+  max-width: 84ch;
+  padding: 24px 30px;
+  border-left: 4px solid var(--green);
+  background: var(--green-bg);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  font-size: var(--fs-body-lg);
+  line-height: 27px;
+  color: var(--ink-strong);
+  margin-bottom: var(--s4);
+}
+
+/* ==========================================================================
+   Строка фактов
+   ========================================================================== */
+
+.facts { display: flex; flex-wrap: wrap; gap: var(--s3) var(--s5); }
+.fact { display: flex; flex-direction: column; gap: 2px; }
+.fact__value { font-family: var(--font-mono); font-size: var(--fs-h2); font-weight: 700; color: var(--ink); }
+.fact__label { font-size: var(--fs-caption); color: var(--muted); }
+.facts--inline { gap: var(--s2) var(--s3); font-size: var(--fs-sm); }
+.facts--inline .fact { flex-direction: row; align-items: baseline; gap: 7px; }
+.facts--inline .fact__value { font-size: var(--fs-body); }
+
+/* ==========================================================================
+   Фирменное зелёное поле. Донор: about_us_2
+   ========================================================================== */
+
+.green-band {
+  background: var(--green);
+  color: var(--white);
+  border-radius: var(--r-lg);
+  padding: var(--s5);
+}
+.green-band h1, .green-band h2, .green-band h3 { color: var(--white); }
+.green-band .btn--secondary { background: var(--white); border-color: var(--white); }
+.green-band .eyebrow { color: rgba(255,255,255,.85); }
+
+/* Половина ширины экрана — точный приём Organi */
+.green-split { position: relative; }
+.green-split::before {
+  content: '';
+  position: absolute; inset: 0 45% 0 -50vw;
+  background: var(--green);
+  border-radius: 0 var(--r-lg) var(--r-lg) 0;
+  z-index: 0;
+}
+.green-split > * { position: relative; z-index: 1; }
+@media (max-width: 992px) { .green-split::before { inset: 0 -50vw 0 -50vw; border-radius: 0; } }
+
+/* ==========================================================================
+   Обратный отсчёт. Донор: Home Page 4
+   ========================================================================== */
+
+.countdown { display: flex; gap: 10px; }
+.countdown__cell {
+  min-width: 62px; padding: 10px 8px;
+  border-radius: var(--r-sm); background: var(--white); box-shadow: var(--sh-soft);
+  text-align: center;
+}
+.countdown__num { font-family: var(--font-mono); font-size: var(--fs-h3); font-weight: 700; color: var(--ink); }
+.countdown__label { font-size: var(--fs-micro); color: var(--muted); text-transform: uppercase; }
+
+/* ==========================================================================
+   Итоговая панель расчёта
+   ========================================================================== */
+
+.totals { background: var(--surface-1); border-radius: var(--r-md); padding: var(--s3); }
+.totals__row { display: flex; justify-content: space-between; gap: var(--s2); padding: 9px 0; font-size: var(--fs-sm); }
+.totals__row + .totals__row { border-top: 1px solid var(--line); }
+.totals__row span:last-child { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink); }
+.totals__row--discount span:last-child { color: var(--green-dark); }
+.totals__row--total { border-top: 2px solid var(--line-strong); font-size: var(--fs-h4); font-weight: 700; color: var(--ink); padding-top: 15px; }
+.totals__row--prepay { background: var(--green-bg); margin: 10px -14px 0; padding: 12px 14px; border-radius: var(--r-sm); border-top: 0; }
+.totals__note { margin-top: var(--s2); font-size: var(--fs-caption); line-height: 17px; color: var(--muted); }
+
+/* ==========================================================================
+   Медиа-заглушка (фотографий помещения и товаров пока нет —
+   выдумывать изображения нельзя, ставим честную рамку)
+   ========================================================================== */
+
+.ph {
+  display: flex; align-items: center; justify-content: center;
+  background: repeating-linear-gradient(45deg, var(--surface-1) 0 12px, #EDF0F3 12px 24px);
+  border-radius: var(--r-md);
+  color: var(--muted);
+  font-size: var(--fs-caption);
+  text-align: center;
+  padding: var(--s2);
+  min-height: 180px;
+}
+.ph--16x9 { aspect-ratio: 16/9; }
+.ph--4x3  { aspect-ratio: 4/3; }
+.ph--1x1  { aspect-ratio: 1/1; }
+.ph--tall { aspect-ratio: 3/4; }
+
+/* --- Строка «изображение слева, содержимое справа» -----------------------
+   Донор: карточка акции и товар в режиме списка. На узком экране
+   схлопывается в одну колонку — иначе появляется горизонтальный скролл,
+   который ТЗ 23.2 запрещает. */
+.media-row { display: grid; grid-template-columns: 200px 1fr; gap: var(--s3); align-items: center; }
+.media-row--sm { grid-template-columns: 130px 1fr; gap: var(--s2); }
+.media-row > .ph { min-height: 0; }
+@media (max-width: 768px) { .media-row, .media-row--sm { grid-template-columns: 1fr; } }
+
+/* Товар в режиме списка */
+.list-view { display: flex; flex-direction: column; gap: var(--s3); }
+.list-view .product { flex-direction: row; }
+.list-view .product__media { flex: 0 0 240px; aspect-ratio: 1; }
+.list-view .product__body { padding: var(--s3); }
+@media (max-width: 768px) {
+  .list-view .product { flex-direction: column; }
+  .list-view .product__media { flex: none; }
+}

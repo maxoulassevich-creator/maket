@@ -1,0 +1,56 @@
+<!-- Плитка товара. Два варианта из трёх: публичный и оптовый.
+     Публичному посетителю кнопки покупки НЕ отрисовываются: они лежат
+     в <template>, содержимое которого браузер в DOM не помещает. -->
+<article class="product">
+  <div class="product__media">
+    <div class="product__badges">
+      <span class="tag">{{cat}}</span>
+      {{#badge}}<span class="tag tag--{{badgetone}}">{{badge}}</span>{{/badge}}
+    </div>
+    <img src="assets/products/{{img}}" alt="{{name}}" loading="lazy">
+  </div>
+  <div class="product__body">
+    <p class="product__origin">{{country}} · {{maker}}</p>
+    <h3 class="product__name"><a href="product.html">{{name}}</a></h3>
+
+    <!-- Цена ВСЕГДА с единицей измерения -->
+    <template data-role-only="guest applicant">
+      <div class="price">
+        <span class="price__value">{{price}}</span>
+        <span class="price__unit">за {{unit}}</span>
+      </div>
+    </template>
+    <template data-role-only="wholesale">
+      <div class="price-pair">
+        <div class="price price--retail">
+          <span class="price__value">{{price}}</span>
+          <span class="price__unit">розница за {{unit}}</span>
+        </div>
+        <div class="price price--personal">
+          <span class="price__value">{{wprice}}</span>
+          <span class="price__unit">ваша цена за {{unit}}</span>
+        </div>
+      </div>
+    </template>
+
+    <span class="product__stock">В наличии</span>
+
+    <div class="product__foot">
+      <!-- Публичный посетитель: единственное действие — перейти в карточку -->
+      <template data-role-only="guest applicant">
+        <a class="product__more" href="product.html">Подробнее →</a>
+      </template>
+      <!-- Подтверждённый оптовик: количество и «В корзину» -->
+      <template data-role-only="wholesale">
+        <div class="product__buy">
+          <div class="qty" data-unit="" data-step="1" data-min="1">
+            <button type="button" data-qty="down" aria-label="Меньше">−</button>
+            <span class="qty__value">1</span>
+            <button type="button" data-qty="up" aria-label="Больше">+</button>
+          </div>
+          <button class="btn btn--primary" type="button">В корзину</button>
+        </div>
+      </template>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,281 @@
+/* ==========================================================================
+   Foodbeer — дизайн-система
+   Извлечена из Figma-макета «Organi Organic» (baj6j5MCoJBq8tDRUGzEXo).
+
+   Каждое значение здесь измерено в исходном макете. Где в исходнике была
+   группа близких значений (следствие автоматической трассировки HTML-шаблона),
+   выбрано одно — обоснование построчно в docs/02-дизайн-система.md.
+
+   Ничего не добавлено «от себя», кроме:
+   - Roboto Mono — по прямому требованию «Структуры»: числа в таблицах
+     моноширинные (в Organi моноширинного шрифта нет);
+   - брейкпоинтов — в Organi нет ни одного фрейма уже 1920, а ТЗ 23.2
+     требует работу на планшете и смартфоне.
+   ========================================================================== */
+
+:root {
+  /* --- Фирменный зелёный -------------------------------------------------
+     Наблюдалось шесть оттенков: #81C408 (75), #7CC000 (94), #7FBA00 (44),
+     #82C408 (24), #9FCB22 (27), #62A403 (70). Первые четыре — один цвет,
+     разошедшийся при трассировке. Сведены к #81C408: именно он заливает
+     кнопки, метки и активные состояния, то есть несёт роль. */
+  --green:            #81C408;   /* Brand / Primary */
+  --green-dark:       #62A403;   /* наведение, нажатие, нижняя грань кнопки */
+  --green-light:      #9FCB22;   /* светлый акцент, мазок-кисть */
+
+  /* --- Нейтральные -------------------------------------------------------
+     Шесть тёмно-серых в диапазоне #191919–#2E2E2E — один цвет. */
+  --ink:              #252525;   /* заголовки, основной тёмный текст */
+  --ink-strong:       #535353;   /* подзаголовки, подписи в таблицах */
+  --body:             #6C747A;   /* абзацы, описания */
+  --muted:            #8799A3;   /* метаданные, зачёркнутая цена */
+  --placeholder:      #A1A1A1;   /* плейсхолдеры, неактивные иконки */
+  --white:            #FFFFFF;
+
+  /* --- Тёмные полосы ----------------------------------------------------- */
+  --band:             #000000;   /* плашка заголовка страницы, 1920×436 */
+  --footer:           #101010;   /* подвал, 1920×605 */
+
+  /* --- Поверхности ------------------------------------------------------- */
+  --surface-1:        #F4F6F8;   /* холодная подложка секции, фон поля */
+  --surface-warm:     #F7F6F2;   /* тёплая подложка секции */
+  --surface-green:    #F2F7F3;   /* зеленоватая подложка */
+  --surface-grey:     #E5E5E5;   /* серая подложка */
+  --line:             #E8EBEE;   /* разделители, рамки карточек */
+  --line-cool:        #D7E6EA;   /* холодная рамка полей */
+  --line-strong:      #E5E5E5;   /* рамка карточки, поля, аккордеона */
+
+  /* --- Функциональные ----------------------------------------------------
+     В Organi нет ни одного цвета под статус документа или заказа.
+     Эти четыре — единственные смысловые цвета, наблюдавшиеся в файле.
+     Десять статусов заказа (ТЗ 17) сведены к четырём группам; подпись
+     рядом с цветом обязательна всегда («Структура», «Таблицы и статусы»). */
+  --warn:             #FFA900;   /* ожидание; в Organi — звёзды рейтинга */
+  --danger:           #F14E18;   /* ошибка, отмена; в Organi — метка скидки */
+  --success:          #39B54A;   /* выполнено; в Organi — галочки в списках */
+  --neutral:          #8799A3;   /* архив, нейтральное состояние */
+
+  --warn-bg:          #FFF6E4;
+  --danger-bg:        #FDEDE8;
+  --success-bg:       #ECF8EE;
+  --neutral-bg:       #EEF2F4;
+  --green-bg:         #F1F8E4;
+
+  /* --- Типографика -------------------------------------------------------
+     Roboto — 679 из 1539 текстовых узлов исходника. Кириллица полная. */
+  --font:             'Roboto', -apple-system, 'Segoe UI', Arial, sans-serif;
+  --font-mono:        'Roboto Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+
+  --fs-display:       45px;  --lh-display: 53px;
+  --fs-h1:            36px;  --lh-h1:      42px;
+  --fs-h2:            28px;  --lh-h2:      34px;
+  --fs-h3:            20px;  --lh-h3:      23px;
+  --fs-h4:            18px;  --lh-h4:      21px;
+  --fs-body-lg:       16px;  --lh-body-lg: 26px;
+  --fs-body:          15px;  --lh-body:    24px;
+  --fs-sm:            14px;  --lh-sm:      21px;
+  --fs-caption:       12px;  --lh-caption: 14px;
+  --fs-micro:         11px;  --lh-micro:   13px;
+
+  /* --- Сетка -------------------------------------------------------------
+     Контейнер в исходнике 1330 при полях 295. Это Bootstrap xxl (1320)
+     плюс погрешность трассировки — работаем с 1320, гаттер 30. */
+  --container:        1320px;
+  --gutter:           30px;
+  --col-4:            310px;   /* 4×310 + 3×30 = 1320 */
+  --col-3:            420px;
+  --col-2:            645px;
+  --sidebar:          250px;
+  --tile-cat:         240px;   /* плитка категории, 5 в ряд */
+
+  /* --- Отступы. Ритм исходника кратен 15 --------------------------------- */
+  --s1:  8px;
+  --s2:  15px;
+  --s3:  30px;
+  --s4:  45px;
+  --s5:  60px;
+  --s6:  90px;
+  --s7:  130px;
+
+  /* --- Радиусы. В исходнике cornerRadius нет ни у одного узла —
+     все скругления нарисованы контурами; значения сняты с геометрии.
+     Пилюля — узнаваемая черта Organi, сохранена. -------------------------- */
+  --r-sm:    5px;
+  --r-md:    10px;
+  --r-lg:    20px;
+  --r-pill:  999px;
+
+  /* --- Тени. В исходнике смещение по X — трассировочный шум,
+     тени в шаблоне вертикальные. ------------------------------------------ */
+  --sh-soft:   0 4px 40px rgba(0, 0, 0, .05);
+  --sh-card:   0 10px 30px rgba(135, 153, 163, .30);
+  --sh-raised: 0 18px 54px rgba(0, 0, 0, .15);
+  --sh-modal:  0 30px 90px rgba(0, 0, 0, .15);
+
+  --header-h:  92px;
+}
+
+/* --- Брейкпоинты (в исходнике отсутствуют, введены по ТЗ 23.2) ------------
+   1400 — десктоп, контейнер 1320
+   1200 — узкий десктоп
+    992 — планшет: сетка 4→3, сайдбар уходит вниз
+    768 — крупный телефон: сетка 3→2, таблицы → карточки
+    576 — телефон: сетка 2→1
+   -------------------------------------------------------------------------- */
+
+/* ==========================================================================
+   Сброс и база
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--body);
+  background: var(--white);
+  overflow-x: hidden;          /* ТЗ 23.2: горизонтального скролла нет */
+}
+
+h1, h2, h3, h4, h5, h6 { margin: 0; color: var(--ink); font-weight: 900; }
+h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); }
+h2 { font-size: var(--fs-h2); line-height: var(--lh-h2); }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); font-weight: 700; }
+h4 { font-size: var(--fs-h4); line-height: var(--lh-h4); }
+
+p { margin: 0 0 var(--s2); }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--green); text-decoration: none; }
+a:hover { color: var(--green-dark); text-decoration: underline; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+ul, ol { margin: 0 0 var(--s2); padding-left: 20px; }
+li { margin-bottom: 6px; }
+
+hr { border: 0; border-top: 1px solid var(--line); margin: var(--s4) 0; }
+
+::selection { background: var(--green); color: var(--white); }
+
+:focus-visible {
+  outline: 2px solid var(--green-dark);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* ==========================================================================
+   Сетка
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.grid { display: grid; gap: var(--gutter); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-9 { grid-template-columns: repeat(3, 1fr); }   /* 9 категорий: 3×3 */
+
+.with-sidebar {
+  display: grid;
+  grid-template-columns: var(--sidebar) 1fr;
+  gap: var(--s4);
+  align-items: start;
+}
+.with-sidebar-right {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--s4);
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .grid-5 { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 992px) {
+  .grid-4, .grid-5 { grid-template-columns: repeat(3, 1fr); }
+  .with-sidebar, .with-sidebar-right { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .grid-3, .grid-4, .grid-5, .grid-9 { grid-template-columns: repeat(2, 1fr); }
+  :root { --s6: 60px; --s7: 75px; --s5: 45px; }
+}
+@media (max-width: 576px) {
+  .grid-2, .grid-3, .grid-4, .grid-5, .grid-9 { grid-template-columns: 1fr; }
+  :root {
+    --fs-display: 30px; --lh-display: 38px;
+    --fs-h1: 26px; --lh-h1: 32px;
+    --fs-h2: 22px; --lh-h2: 28px;
+    --gutter: 20px;
+  }
+}
+
+/* ==========================================================================
+   Секции и ритм
+   ========================================================================== */
+
+.section { padding: var(--s6) 0; }
+.section--tight { padding: var(--s5) 0; }
+.section--warm  { background: var(--surface-warm); }
+.section--cool  { background: var(--surface-1); }
+.section--green { background: var(--surface-green); }
+.section--grey  { background: var(--surface-grey); }
+
+/* Приём Organi: надзаголовок капсом с зелёными точками → крупный заголовок */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-caption);
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+.eyebrow::before,
+.eyebrow::after { content: '∘∘∘'; letter-spacing: -2px; opacity: .8; }
+
+.section-head { margin-bottom: var(--s4); }
+.section-head--center { text-align: center; }
+.section-head--center .eyebrow { justify-content: center; }
+.section-head--split {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s3);
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Утилиты
+   ========================================================================== */
+
+.u-center     { text-align: center; }
+.u-right      { text-align: right; }
+.u-mono       { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.u-num        { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+.u-muted      { color: var(--muted); }
+.u-ink        { color: var(--ink); }
+.u-green      { color: var(--green); }
+.u-nowrap     { white-space: nowrap; }
+.u-sr         { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+                overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.u-mt0 { margin-top: 0; }
+.u-mb0 { margin-bottom: 0; }
+.u-mb1 { margin-bottom: var(--s1); }
+.u-mb2 { margin-bottom: var(--s2); }
+.u-mb3 { margin-bottom: var(--s3); }
+.u-mb4 { margin-bottom: var(--s4); }
+.u-lead { font-size: var(--fs-body-lg); line-height: var(--lh-body-lg); }
