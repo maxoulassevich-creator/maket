@@ -179,6 +179,11 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--s4) 0; }
   padding: 0 var(--gutter);
 }
 
+/* Элементы грида по умолчанию имеют min-width:auto и не дают контейнеру
+   сжаться — из-за этого на узком экране появляется горизонтальный скролл,
+   который ТЗ 23.2 запрещает. Разрешаем сжиматься явно. */
+.grid > *, .with-sidebar > *, .with-sidebar-right > *, .account > * { min-width: 0; }
+
 .grid { display: grid; gap: var(--gutter); }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }

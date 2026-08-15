@@ -1,0 +1,240 @@
+<!--meta
+{"title":"Сыры","url":"/catalog/сыры/","group":"Публичная витрина","order":30,
+ "note":"Категория с панелью фильтров, метками подкатегорий, списком товаров и текстом «Как выбрать». Донор каркаса — shop_list_side_bar.",
+ "states":["гость","заявитель","оптовик","пустая категория","мобильная шторка фильтров"]}
+-->
+
+{{> pagehead h1="Сыры" crumb2="<a href=\"catalog.html\">Каталог</a><span class=\"crumbs__sep\">›</span>" }}
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="facts facts--inline u-mb3">
+      <div class="fact"><span class="fact__value">44</span><span class="fact__label">позиции в наличии</span></div>
+      <div class="fact"><span class="fact__value">190 — 1 240 ₽</span><span class="fact__label">за 100 г</span></div>
+      <div class="fact"><span class="fact__value">7</span><span class="fact__label">стран</span></div>
+      <div class="fact"><span class="fact__value">14:20</span><span class="fact__label">обновлено сегодня</span></div>
+    </div>
+
+    <p class="brief">
+      Сыры Foodbeer — 44 позиции в наличии: твёрдые выдержанные, мягкие с белой плесенью,
+      козьи и овечьи, с голубой плесенью и с трюфелем. Цены — от 190 до 1 240 рублей
+      за 100 граммов, все весовые позиции режутся при вас. Показаны только сорта,
+      которые сегодня стоят в витрине; закончившиеся из списка исчезают.
+    </p>
+
+    <div class="chips u-mb4">
+      <script class="ann" type="application/json">
+      {"section":"Метки подкатегорий",
+       "what":"Быстрые переходы по подкатегориям с количеством позиций в каждой.",
+       "how":"Одна строка меток над списком товаров, выбранная подсвечена.",
+       "why":"Быстрее фильтров для самого частого уточнения. Числа сразу показывают, есть ли смысл заходить в подкатегорию.",
+       "src":"«Структура», Категория"}
+      </script>
+      <a class="chip chip--active" href="category.html">Все <span class="chip__count">44</span></a>
+      <a class="chip" href="category.html">Твёрдые <span class="chip__count">12</span></a>
+      <a class="chip" href="category.html">Мягкие <span class="chip__count">9</span></a>
+      <a class="chip" href="category.html">С плесенью <span class="chip__count">7</span></a>
+      <a class="chip" href="category.html">Козьи <span class="chip__count">6</span></a>
+      <a class="chip" href="category.html">Овечьи <span class="chip__count">4</span></a>
+      <a class="chip" href="category.html">С трюфелем <span class="chip__count">3</span></a>
+      <a class="chip" href="category.html">Нарезка <span class="chip__count">3</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="with-sidebar">
+
+      <!-- ПАНЕЛЬ ФИЛЬТРОВ -->
+      <aside class="filters" data-filters>
+        <script class="ann" type="application/json">
+        {"section":"Панель фильтров",
+         "what":"Категория, цена, страна, производитель, формат, признаки и наличие.",
+         "how":"Выбранные условия показываются отдельными метками с быстрым сбросом, счётчик найденного пересчитывается ДО применения. На телефоне открывается нижней шторкой с кнопкой «Показать N товаров».",
+         "why":"Счётчик до применения избавляет от цикла «применил — пусто — вернулся». На телефоне шторка не отнимает место у товаров.",
+         "src":"«Структура», сквозная секция"}
+        </script>
+
+        <div class="filters__group">
+          <div class="filters__title">Выбрано</div>
+          <div class="chips">
+            <span class="chip chip--applied">Италия <button type="button" aria-label="Убрать">×</button></span>
+            <span class="chip chip--applied">от 12 мес. <button type="button" aria-label="Убрать">×</button></span>
+          </div>
+          <button class="btn btn--ghost u-mt0" type="button" style="margin-top:12px">Сбросить всё</button>
+        </div>
+
+        <div class="filters__group">
+          <div class="filters__title">Страна</div>
+          <div class="filters__list">
+            <label class="filters__row"><input type="checkbox" checked> Италия <span class="filters__row-count">18</span></label>
+            <label class="filters__row"><input type="checkbox"> Франция <span class="filters__row-count">9</span></label>
+            <label class="filters__row"><input type="checkbox"> Испания <span class="filters__row-count">6</span></label>
+            <label class="filters__row"><input type="checkbox"> Швейцария <span class="filters__row-count">4</span></label>
+            <label class="filters__row"><input type="checkbox"> Россия <span class="filters__row-count">7</span></label>
+          </div>
+        </div>
+
+        <div class="filters__group">
+          <div class="filters__title">Цена за 100 г</div>
+          <div class="filters__range">
+            <span class="u-mono">190 ₽</span>
+            <input type="range" min="190" max="1240" value="1240" aria-label="Максимальная цена">
+            <span class="u-mono">1 240 ₽</span>
+          </div>
+        </div>
+
+        <div class="filters__group">
+          <div class="filters__title">Производитель</div>
+          <div class="filters__list">
+            <label class="filters__row"><input type="checkbox"> Consorzio Parmigiano <span class="filters__row-count">5</span></label>
+            <label class="filters__row"><input type="checkbox"> Caseificio Umbra <span class="filters__row-count">4</span></label>
+            <label class="filters__row"><input type="checkbox"> Fromagerie Berthaut <span class="filters__row-count">3</span></label>
+          </div>
+        </div>
+
+        <div class="filters__group">
+          <div class="filters__title">Формат продажи</div>
+          <div class="filters__list">
+            <label class="filters__row"><input type="checkbox"> Весовой, режем при вас <span class="filters__row-count">31</span></label>
+            <label class="filters__row"><input type="checkbox"> Упакованный <span class="filters__row-count">10</span></label>
+            <label class="filters__row"><input type="checkbox"> Нарезка <span class="filters__row-count">3</span></label>
+          </div>
+        </div>
+
+        <div class="filters__group">
+          <div class="filters__title">Признаки</div>
+          <div class="filters__list">
+            <label class="filters__row"><input type="checkbox"> Выдержка от 12 мес. <span class="filters__row-count">14</span></label>
+            <label class="filters__row"><input type="checkbox"> Из непастеризованного молока <span class="filters__row-count">8</span></label>
+            <label class="filters__row"><input type="checkbox"> Козье молоко <span class="filters__row-count">6</span></label>
+          </div>
+        </div>
+
+        <div class="filters__apply">
+          <button class="btn btn--primary btn--block" type="button" data-filters-apply>
+            Показать <span data-filter-count="44">44</span> товара
+          </button>
+        </div>
+      </aside>
+
+      <!-- СПИСОК ТОВАРОВ -->
+      <div>
+        <div class="listbar">
+          <span class="listbar__count">Показано <b>1–12</b> из <b data-filter-count-echo>44</b> позиций</span>
+          <div class="listbar__tools">
+            <button class="btn btn--secondary btn--sm filters-toggle" type="button" data-filters-toggle>Фильтры</button>
+            <div class="viewswitch">
+              <button type="button" data-view="grid" aria-pressed="true" aria-label="Сеткой">▦</button>
+              <button type="button" data-view="list" aria-pressed="false" aria-label="Списком">☰</button>
+            </div>
+            <label class="u-sr" for="sort">Сортировка</label>
+            <select class="select" id="sort">
+              <option>Сначала популярные</option>
+              <option>Сначала новые поступления</option>
+              <option>Цена по возрастанию</option>
+              <option>Цена по убыванию</option>
+            </select>
+          </div>
+        </div>
+
+        <script class="ann" type="application/json">
+        {"section":"Список товаров",
+         "what":"Сетка плиток с ценой, единицей измерения и наличием.",
+         "how":"Публичному посетителю позиции без наличия не показываются вовсе. Плитка имеет три варианта: публичный — без кнопок покупки, оптовый — количество, «В корзину» и две цены, алкогольный — плашка ограничения.",
+         "why":"Витрина отражает полку. Показать то, чего нет, — значит привести человека в магазин зря.",
+         "src":"«Структура», Категория"}
+        </script>
+
+        <div class="grid grid-3" data-view-target>
+          {{> product img="01-syry/syr-tverdyy-vyderzhannyy.png" cat="Твёрдые" name="Пармиджано Реджано 24 мес." country="Италия" maker="Consorzio Parmigiano" price="690 ₽" wprice="607 ₽" unit="100 г" }}
+          {{> product img="01-syry/syr-s-beloy-plesenyu-kamamber.png" cat="Мягкие" name="Камамбер де Норманди" country="Франция" maker="Fromagerie Berthaut" price="410 ₽" wprice="361 ₽" unit="100 г" }}
+          {{> product img="01-syry/syr-s-tryufelem.png" cat="С трюфелем" name="Качотта с трюфелем" country="Италия" maker="Caseificio Umbra" price="740 ₽" wprice="651 ₽" unit="100 г" badge="12 августа" badgetone="green" }}
+          {{> product img="01-syry/syr-kozyy-shevr.png" cat="Козьи" name="Шевр выдержанный" country="Франция" maker="Soignon" price="520 ₽" wprice="458 ₽" unit="100 г" }}
+          {{> product img="01-syry/syr-s-goluboy-plesenyu.png" cat="С плесенью" name="Горгонзола Дольче" country="Италия" maker="Caseificio Umbra" price="480 ₽" wprice="422 ₽" unit="100 г" }}
+          {{> product img="01-syry/syr-tverdyy-vyderzhannyy.png" cat="Твёрдые" name="Грана Падано 16 мес." country="Италия" maker="Consorzio Parmigiano" price="450 ₽" wprice="396 ₽" unit="100 г" }}
+        </div>
+
+        <script class="ann" type="application/json">
+        {"section":"Догрузка и постраничная навигация",
+         "what":"Кнопка «Показать ещё» и ссылки на страницы внизу списка.",
+         "how":"Кнопка догружает товары, адрес страницы при этом меняется. Ссылочная навигация внизу нужна поисковым роботам и сохраняется всегда.",
+         "why":"Догрузка удобнее людям, ссылки — роботам. Оставить только первое означает лишить поисковые системы доступа к товарам за первым экраном.",
+         "src":"«Структура», сквозная секция"}
+        </script>
+        <div class="u-center" style="margin-top:var(--s4)">
+          <button class="btn btn--secondary btn--lg" type="button">Показать ещё 12 из 44</button>
+        </div>
+        <nav class="pagination" aria-label="Страницы">
+          <span aria-current="page">1</span>
+          <a href="category.html">2</a>
+          <a href="category.html">3</a>
+          <a href="category.html">4</a>
+          <a href="category.html" aria-label="Следующая">→</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ТЕКСТ «КАК ВЫБРАТЬ» -->
+<section class="section section--topo">
+  <script class="ann" type="application/json">
+  {"section":"Текст «Как выбрать»",
+   "what":"Разбор с подзаголовками-вопросами, сравнительной таблицей и практическими критериями: чем отличается выдержка, сколько брать на компанию, в каком порядке раскладывать.",
+   "how":"Подзаголовки сформулированы так, как вопрос задают вслух. Таблица даёт конкретные граммовки, а не общие слова.",
+   "why":"Это не текст «для сеошника» под списком товаров, а ответ на вопрос, ради которого человек и открыл категорию. Такой блок закрывает запрос на месте и попадает в прямые ответы поиска.",
+   "src":"«Структура», Категория"}
+  </script>
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Разбираемся</span><h2>Как выбрать сыр</h2></div>
+
+    <div class="grid grid-2 u-mb4">
+      <div>
+        <h3 class="u-mb2">Сколько брать на компанию</h3>
+        <p class="u-mb3">На сырную тарелку считают 100–125 граммов на человека, если это закуска,
+          и 150–200 граммов, если сыр — основа стола. На четверых достаточно 500 граммов:
+          это четыре-пять сортов по 100 граммов, больше не съедается и подсыхает.</p>
+        <h3 class="u-mb2">В каком порядке раскладывать</h3>
+        <p class="u-mb0">По часовой стрелке от самого мягкого и нейтрального к самому солёному
+          и выдержанному. Начинают с мягких, заканчивают голубой плесенью — иначе
+          после неё вкус остальных сортов не читается.</p>
+      </div>
+      <div>
+        <h3 class="u-mb2">Чем отличается выдержка</h3>
+        <div class="table-wrap">
+          <table class="table table--cards">
+            <thead><tr><th>Выдержка</th><th>Текстура и вкус</th><th class="num">Цена за 100 г</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Выдержка" class="table__name">12 месяцев</td>
+                  <td data-label="Текстура">Пластичный, молочный, мягкая солёность</td>
+                  <td data-label="Цена" class="num">450 ₽</td></tr>
+              <tr><td data-label="Выдержка" class="table__name">24 месяца</td>
+                  <td data-label="Текстура">Ломкий, кристаллы соли, ореховый тон</td>
+                  <td data-label="Цена" class="num">690 ₽</td></tr>
+              <tr><td data-label="Выдержка" class="table__name">36 месяцев</td>
+                  <td data-label="Текстура">Сухой, острый, отчётливая горчинка</td>
+                  <td data-label="Цена" class="num">980 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{> faq title="Вопросы о сырах"
+        q1="Сколько сыра брать на четверых"
+        a1="На сырную тарелку как закуску считают 100–125 граммов на человека, то есть на четверых достаточно 500 граммов. Это четыре-пять сортов по 100 граммов. Если сыр — основа стола, а не закуска, берут 150–200 граммов на человека."
+        q2="Чем отличается выдержка 12 и 24 месяца"
+        a2="Двенадцатимесячный сыр пластичный и молочный, с мягкой солёностью. К двадцати четырём месяцам он становится ломким, в нём появляются кристаллы соли и ореховый тон. Разница в цене — примерно в полтора раза, и она заметна на вкус, а не только в описании."
+        q3="Весовой сыр режут при покупке"
+        a3="Да, 31 позиция из 44 — весовая: сыр режут при вас на нужный кусок. Цена указана за 100 граммов, итоговая сумма считается по фактическому весу. Десять позиций продаются в заводской упаковке, три — готовой нарезкой."
+        q4="Как хранить сыр дома"
+        a4="Твёрдые сорта хранят в бумаге, а не в плёнке: в плёнке сыр задыхается и приобретает посторонний запах. Мягкие сорта с белой плесенью держат в оригинальной коробке. Точный срок годности каждой позиции указан в её карточке — только подтверждённые значения из учётной системы."
+        q5="Почему часть сортов пропала из списка"
+        a5="Публичная витрина показывает только то, что есть в наличии сегодня. Позиция, которую разобрали, из списка исчезает, а не помечается как отсутствующая. Когда сорт снова привезут, он вернётся в каталог и попадёт в раздел «Новинки» с датой приёмки." }}
+
+{{> seealso }}
+{{> wholesale-cta }}

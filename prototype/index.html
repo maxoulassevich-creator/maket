@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Указатель страниц — Foodbeer</title>
+<meta name="description" content="">
+<!-- Шрифты лежат рядом: страницы открываются двойным кликом без интернета -->
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/design-system.css">
+<link rel="stylesheet" href="assets/components.css">
+<link rel="stylesheet" href="assets/layout.css">
+<link rel="stylesheet" href="assets/decor.css">
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+
+<!-- Служебная полоса. Статус считается из расписания, а не пишется руками. -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <div class="topbar__group">
+      <span class="topbar__item">📍 <a href="contacts.html">Волгоград, [адрес — заполняется перед запуском]</a></span>
+      <span class="topbar__item topbar__hide-sm">
+        <span class="status status--work">Открыто до 21:00</span>
+      </span>
+    </div>
+    <div class="topbar__group">
+      <span class="topbar__item topbar__hide-sm">☎ <a href="tel:+70000000000">[телефон]</a></span>
+      <span class="topbar__item">✈ <a href="#" rel="noopener">Telegram-канал</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- Шапка. Три состояния роли. Разметка для чужой роли лежит в <template>
+     и в DOM не попадает — это не CSS-скрытие (ТЗ 4.1). -->
+<header class="header">
+  <div class="container header__main">
+    <a class="logo" href="index.html">
+      <span class="logo__name">Food<b>beer</b></span>
+      <span class="logo__tag">гастромаркет</span>
+    </a>
+
+    <div style="position:relative">
+      <button class="header__catalog" type="button" data-catalog-toggle aria-haspopup="true">
+        ☰ <span>Каталог</span>
+      </button>
+      <div class="catalog-menu" data-catalog-menu hidden>
+        <div class="catalog-menu__grid">
+          <a class="catalog-menu__item" href="category.html">Сыры <span class="catalog-menu__count">44</span></a>
+          <a class="catalog-menu__item" href="category.html">Мясные деликатесы <span class="catalog-menu__count">38</span></a>
+          <a class="catalog-menu__item" href="category.html">Рыбные деликатесы <span class="catalog-menu__count">21</span></a>
+          <a class="catalog-menu__item" href="category.html">Закуски и антипасти <span class="catalog-menu__count">52</span></a>
+          <a class="catalog-menu__item" href="category.html">Десерты и сладости <span class="catalog-menu__count">33</span></a>
+          <a class="catalog-menu__item" href="category.html">Чай, кофе и бакалея <span class="catalog-menu__count">29</span></a>
+          <a class="catalog-menu__item" href="category.html">Безалкогольные напитки <span class="catalog-menu__count">18</span></a>
+          <a class="catalog-menu__item" href="gifts.html">Подарки и наборы <span class="catalog-menu__count">12</span></a>
+          <a class="catalog-menu__item" href="alcohol.html">Алкогольная витрина <span class="catalog-menu__count">26</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="search">
+      <label class="u-sr" for="q">Поиск по каталогу</label>
+      <input class="search__input" id="q" type="search" placeholder="Пармезан, хамон, тоник…" data-search-input>
+      <button class="search__submit" type="button" aria-label="Найти">🔍</button>
+      <div class="search__suggest" data-search-suggest hidden>
+        <div class="search__group">Товары</div>
+        <a class="search__row" href="product.html">
+          <span class="search__row-name">Пармиджано Реджано 24 мес.</span>
+          <span class="search__row-price">от 690 ₽ / 100 г</span>
+        </a>
+        <a class="search__row" href="product.html">
+          <span class="search__row-name">Хамон Серрано, нарезка</span>
+          <span class="search__row-price">от 540 ₽ / 100 г</span>
+        </a>
+        <div class="search__group">Категории</div>
+        <a class="search__row" href="category.html"><span class="search__row-name">Сыры</span>
+          <span class="search__row-price">44 позиции</span></a>
+      </div>
+    </div>
+
+    <div class="header__user">
+      <!-- ГОСТЬ -->
+      <template data-role-only="guest">
+        <div class="user-guest">
+          <a class="btn btn--secondary btn--sm" href="login.html">Войти</a>
+          <a class="btn btn--primary btn--sm" href="wholesale.html">Опт</a>
+        </div>
+      </template>
+
+      <!-- ЗАЯВИТЕЛЬ: видит состояние своей заявки -->
+      <template data-role-only="applicant">
+        <a class="user-applicant" href="wholesale-status.html">
+          <span class="status-big__dot" style="width:10px;height:10px;flex:0 0 10px;background:var(--warn)"></span>
+          <span>
+            <span class="user-applicant__label">Заявка на опт</span>
+            <span class="user-applicant__state">На проверке</span>
+          </span>
+        </a>
+      </template>
+
+      <!-- ПОДТВЕРЖДЁННЫЙ ОПТОВИК: организация, скидка, корзина с суммой -->
+      <template data-role-only="wholesale">
+        <div class="user-wholesale">
+          <a class="user-wholesale__org" href="account.html" style="text-decoration:none">
+            <span class="user-wholesale__name">ООО «Траттория»</span>
+            <span class="user-wholesale__discount">персональная скидка 12 %</span>
+          </a>
+          <a class="mini-cart" href="cart.html">
+            🧺 <span class="mini-cart__sum">48 250 ₽</span>
+            <span class="mini-cart__count">7</span>
+          </a>
+        </div>
+      </template>
+    </div>
+  </div>
+
+  <nav class="header__nav" aria-label="Основное меню">
+    <div class="container header__nav-inner">
+      <a href="index.html">Все страницы</a>
+      <a href="home.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="promotions.html">Акции</a>
+      <a href="new.html">Новинки</a>
+      <a href="gifts.html">Подарочные наборы</a>
+      <a href="second-floor.html">Второй этаж</a>
+      <a href="journal.html">Журнал</a>
+      <a href="about.html">О гастромаркете</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="wholesale.html" data-role-hide="wholesale">Оптовым покупателям</a>
+      <template data-role-only="wholesale"><a href="account.html">Личный кабинет</a></template>
+    </div>
+  </nav>
+</header>
+
+
+<main id="main">
+<section class="pindex">
+  <div class="container">
+    <span class="eyebrow">Прототип Foodbeer</span>
+    <h1 class="u-mb3">Указатель страниц</h1>
+    <p class="pindex__lead u-lead">
+      Прототип собран на дизайн-системе, извлечённой из макета «Organi Organic».
+      Внизу экрана — служебная панель: <b>переключатель роли</b> (гость / заявитель /
+      подтверждённый оптовик) и кнопка <b>«Аннотации»</b>, которая показывает разбор
+      каждой секции по схеме Что / Как / Зачем со ссылкой на источник требования.
+    </p>
+
+    <div class="notice notice--green">
+      <span class="notice__icon">✓</span>
+      <span class="notice__body">
+        <b class="notice__title">Роль переключает разметку, а не стили</b>
+        Содержимое для чужой роли лежит в <code>&lt;template&gt;</code> и в DOM не попадает.
+        Откройте инспектор под гостем — узла корзины и кнопок покупки там нет.
+        Это прямое требование ТЗ 4.1: «скрытие кнопок только средствами CSS не допускается».
+      </span>
+    </div>
+
+    <div class="notice notice--warn">
+      <span class="notice__icon">⏳</span>
+      <span class="notice__body">
+        <b class="notice__title">Состояние работы</b>
+        Собрано 6 страниц из 35. Остальные перечислены ниже как запланированные —
+        порядок производства и приоритеты в <code>docs/04-пробелы.md</code>,
+        соглашения по вёрстке в <code>docs/06-производство.md</code>.
+      </span>
+    </div>
+
+    <div class="pindex__group">
+      <h2>Собрано</h2>
+      <div class="pindex__list">
+        <a class="pindex__item" href="home.html">
+          <span class="pindex__name">Главная</span><span class="pindex__url">/</span>
+          <span class="pindex__note">Первый экран с живым счётчиком, полоса фактов, «Коротко», поступления, 9 категорий, подбор по задаче, акции, второй этаж, журнал, опт, Telegram, вопросы, контакты.</span>
+          <span class="pindex__states"><span class="pindex__state">3 роли</span><span class="pindex__state">адаптив</span></span>
+        </a>
+        <a class="pindex__item" href="catalog.html">
+          <span class="pindex__name">Каталог</span><span class="pindex__url">/catalog/</span>
+          <span class="pindex__note">Девять категорий, «Часто берут», таблица «Что нужно знать о каталоге».</span>
+          <span class="pindex__states"><span class="pindex__state">3 роли</span></span>
+        </a>
+        <a class="pindex__item" href="category.html">
+          <span class="pindex__name">Категория — Сыры</span><span class="pindex__url">/catalog/сыры/</span>
+          <span class="pindex__note">Панель фильтров со счётчиком до применения, метки подкатегорий, список, «Как выбрать» со сравнительной таблицей.</span>
+          <span class="pindex__states"><span class="pindex__state">3 роли</span><span class="pindex__state">шторка фильтров</span></span>
+        </a>
+        <a class="pindex__item" href="product.html">
+          <span class="pindex__name">Карточка товара</span><span class="pindex__url">/product/пармиджано-24/</span>
+          <span class="pindex__note">Галерея, характеристики, заметка продавца, «С чем сочетать», «Чем заменить». Блок цены и действия — в трёх вариантах роли.</span>
+          <span class="pindex__states"><span class="pindex__state">3 роли</span></span>
+        </a>
+        <a class="pindex__item" href="alcohol.html">
+          <span class="pindex__name">Алкогольная витрина</span><span class="pindex__url">/catalog/алкоголь/</span>
+          <span class="pindex__note">Два состояния и две формулировки плашки. Показан и третий случай: оптовик + позиция без признака доступности оптового заказа.</span>
+          <span class="pindex__states"><span class="pindex__state">2 состояния</span><span class="pindex__state">расхождение ТЗ/Структуры</span></span>
+        </a>
+        <a class="pindex__item" href="product-alcohol.html">
+          <span class="pindex__name">Карточка алкогольного товара</span><span class="pindex__url">/product/эль-тёмный/</span>
+          <span class="pindex__note">Плашка стоит вплотную к цене. «С чем сочетать» — только неалкогольные позиции.</span>
+          <span class="pindex__states"><span class="pindex__state">2 состояния</span></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="pindex__group">
+      <h2>Запланировано — публичная витрина</h2>
+      <p class="pindex__lead">Каркас-донор в Organi есть у отмеченных; остальные собираются из секций-доноров (docs/03, п. 3.3).</p>
+      <div class="pindex__list">
+        <span class="pindex__item"><span class="pindex__name">Акции</span><span class="pindex__url">/promotions/</span><span class="pindex__note">Карточки с обратным отсчётом + архив завершённых. Состояние «только архив».</span></span>
+        <span class="pindex__item"><span class="pindex__name">Карточка акции</span><span class="pindex__url">/promotions/хамон-15/</span><span class="pindex__note">Точные даты, условия, товары-участники.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Новинки</span><span class="pindex__url">/new/</span><span class="pindex__note">Поступления по неделям с датой приёмки.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Подарочные наборы</span><span class="pindex__url">/gifts/</span><span class="pindex__note">Подбор по бюджету и поводу, наборы с раскрытым составом.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Результаты поиска</span><span class="pindex__url">/search/</span><span class="pindex__note">Вкладки, подсказка о синонимах, пустой результат. 3 состояния.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Журнал</span><span class="pindex__url">/journal/</span><span class="pindex__note">Донор: blog_gird_2.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Рубрика журнала</span><span class="pindex__url">/journal/советы-по-выбору/</span><span class="pindex__note">Донор: blog_list.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Публикация журнала</span><span class="pindex__url">/journal/сырная-тарелка/</span><span class="pindex__note">Донор: blog_detail + оглавление сбоку, связанные товары, карточка автора.</span></span>
+        <span class="pindex__item"><span class="pindex__name">О гастромаркете</span><span class="pindex__url">/about/</span><span class="pindex__note">Зелёное поле, три части формата, таблица принципов, команда витрины.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Второй этаж</span><span class="pindex__url">/second-floor/</span><span class="pindex__note">Фотолента, четыре шага, правила (до утверждения магазином блок не выводится).</span></span>
+        <span class="pindex__item"><span class="pindex__name">Контакты</span><span class="pindex__url">/contacts/</span><span class="pindex__note">Донор: contact_us. Таблица режима, отдельный контакт оптового отдела, реквизиты.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Юридические страницы</span><span class="pindex__url">/legal/…</span><span class="pindex__note">Оглавление сбоку, дата редакции, смежные документы.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Страница не найдена</span><span class="pindex__url">/404</span><span class="pindex__note">2 сценария: адрес изменился / товар ушёл с витрины.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Служебное сообщение</span><span class="pindex__url">/message/…</span><span class="pindex__note">Один шаблон, 5 случаев.</span></span>
+      </div>
+    </div>
+
+    <div class="pindex__group">
+      <h2>Запланировано — оптовый контур</h2>
+      <div class="pindex__list">
+        <span class="pindex__item"><span class="pindex__name">Оптовым покупателям</span><span class="pindex__url">/wholesale/</span><span class="pindex__note">8 секций, включая блок «Чего у нас нет».</span></span>
+        <span class="pindex__item"><span class="pindex__name">Регистрация оптовика</span><span class="pindex__url">/wholesale/register/</span><span class="pindex__note">13 полей, маски ИНН/КПП/телефона, раздельные согласия, «Что дальше».</span></span>
+        <span class="pindex__item"><span class="pindex__name">Статус заявки</span><span class="pindex__url">/wholesale/status/</span><span class="pindex__note">3 состояния: на проверке / подтверждена / отклонена с причиной.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Вход</span><span class="pindex__url">/login/</span><span class="pindex__note">3 состояния: обычный / единая ошибка / временная блокировка.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Оптовая корзина</span><span class="pindex__url">/cart/</span><span class="pindex__note">4 состояния. Две цены в строке, предупреждение об изменении цены, предоплата, минимальная сумма.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Оформление заказа</span><span class="pindex__url">/checkout/</span><span class="pindex__note">Шаги, реквизиты только для просмотра, крупная плашка «онлайн-оплаты нет».</span></span>
+        <span class="pindex__item"><span class="pindex__name">Заказ оформлен</span><span class="pindex__url">/checkout/received/…</span><span class="pindex__note">3 состояния: счёт готов / формируется / ошибка формирования.</span></span>
+      </div>
+    </div>
+
+    <div class="pindex__group">
+      <h2>Запланировано — личный кабинет</h2>
+      <p class="pindex__lead">Донора в Organi нет ни у одной из восьми страниц.</p>
+      <div class="pindex__list">
+        <span class="pindex__item"><span class="pindex__name">Кабинет — обзор</span><span class="pindex__url">/account/</span><span class="pindex__note">Приветствие с условиями, предупреждение о неоплаченных счетах, сводка, последние заказы, повтор заказа.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Профиль и реквизиты</span><span class="pindex__url">/account/profile/</span><span class="pindex__note">Данные организации, банковские реквизиты, контактное лицо.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Мои условия</span><span class="pindex__url">/account/terms/</span><span class="pindex__note">Сводка, действующие условия, «Как считается цена» на конкретном примере.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Акции и промокоды</span><span class="pindex__url">/account/promotions/</span><span class="pindex__note">Персональные коды, закрытые акции группы, история использования.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Заказы</span><span class="pindex__url">/account/orders/</span><span class="pindex__note">Фильтры по статусу, таблица со ссылкой на счёт.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Заказ — подробно</span><span class="pindex__url">/account/orders/…</span><span class="pindex__note">Шкала статусов, состав, расчёт, счёт с версиями, история изменений.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Счета</span><span class="pindex__url">/account/invoices/</span><span class="pindex__note">Предупреждение о сроке, все версии, реквизиты для оплаты с копированием.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Пароль и безопасность</span><span class="pindex__url">/account/security/</span><span class="pindex__note">Смена пароля, последние входы, выход с сохранением корзины.</span></span>
+      </div>
+    </div>
+
+    <div class="pindex__group">
+      <h2>Служебное</h2>
+      <div class="pindex__list">
+        <span class="pindex__item"><span class="pindex__name">Стайлгайд</span><span class="pindex__url">styleguide.html</span><span class="pindex__note">Палитра, шкала, сетка и все ~25 компонентов в 37 состояниях. Первая задача следующего исполнителя.</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__top-inner">
+        <a class="logo" href="index.html">
+          <span class="logo__name">Food<b>beer</b></span>
+          <span class="logo__tag">гастромаркет</span>
+        </a>
+        <p class="u-mb0" style="color:rgba(255,255,255,.65);max-width:46ch">
+          Витрина, на которой только то, что сегодня лежит на полке.
+        </p>
+        <a class="btn btn--primary" href="#" rel="noopener">Telegram-канал →</a>
+      </div>
+    </div>
+
+    <div class="footer__cols">
+      <div class="footer__col">
+        <div class="footer__col-title">Каталог</div>
+        <a href="category.html">Сыры</a>
+        <a href="category.html">Мясные деликатесы</a>
+        <a href="category.html">Рыбные деликатесы</a>
+        <a href="category.html">Закуски и антипасти</a>
+        <a href="category.html">Десерты и сладости</a>
+        <a href="category.html">Чай, кофе и бакалея</a>
+        <a href="category.html">Безалкогольные напитки</a>
+        <a href="gifts.html">Подарки и наборы</a>
+        <a href="alcohol.html">Алкогольная витрина</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Покупателям</div>
+        <a href="catalog.html">Каталог</a>
+        <a href="promotions.html">Акции</a>
+        <a href="new.html">Новинки</a>
+        <a href="second-floor.html">Второй этаж</a>
+        <a href="journal.html">Журнал</a>
+        <a href="search.html">Поиск</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Опт</div>
+        <a href="wholesale.html">Оптовые условия</a>
+        <a href="wholesale-register.html">Подать заявку</a>
+        <a href="wholesale-status.html">Статус заявки</a>
+        <a href="login.html">Вход в кабинет</a>
+        <a href="account.html">Личный кабинет</a>
+        <a href="account-invoices.html">Счета</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Контакты</div>
+        <div class="footer__contact">
+          <span><b>Адрес:</b> [заполняется перед запуском]</span>
+          <span><b>Режим:</b> пн–вс, 10:00–21:00</span>
+          <span><b>Телефон:</b> [заполняется]</span>
+          <span><b>Оптовый отдел:</b> [заполняется]</span>
+          <span><b>Telegram:</b> <a href="#">@foodbeer</a></span>
+        </div>
+        <p class="footer__req">
+          ИП [Ф.И.О.] · ИНН [—] · ОГРНИП [—]<br>
+          Реквизиты заполняются данными владельца перед запуском.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer__sync">
+      Цены и остатки обновляются из учётной системы 1С:УНФ. Последнее обновление — сегодня в 14:20.
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 Foodbeer</span>
+      <span>
+        <a href="legal.html">Политика обработки персональных данных</a> ·
+        <a href="legal.html">Пользовательское соглашение</a> ·
+        <a href="legal.html">Согласия</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/prototype.js"></script>
+</body>
+</html>

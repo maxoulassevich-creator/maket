@@ -1,0 +1,129 @@
+<!--meta
+{"title":"Указатель страниц","url":"/","group":"Служебное","order":0,
+ "note":"Точка входа в прототип: все 35 страниц «Структуры», отмечено что собрано и что осталось."}
+-->
+
+<section class="pindex">
+  <div class="container">
+    <span class="eyebrow">Прототип Foodbeer</span>
+    <h1 class="u-mb3">Указатель страниц</h1>
+    <p class="pindex__lead u-lead">
+      Прототип собран на дизайн-системе, извлечённой из макета «Organi Organic».
+      Внизу экрана — служебная панель: <b>переключатель роли</b> (гость / заявитель /
+      подтверждённый оптовик) и кнопка <b>«Аннотации»</b>, которая показывает разбор
+      каждой секции по схеме Что / Как / Зачем со ссылкой на источник требования.
+    </p>
+
+    <div class="notice notice--green">
+      <span class="notice__icon">✓</span>
+      <span class="notice__body">
+        <b class="notice__title">Роль переключает разметку, а не стили</b>
+        Содержимое для чужой роли лежит в <code>&lt;template&gt;</code> и в DOM не попадает.
+        Откройте инспектор под гостем — узла корзины и кнопок покупки там нет.
+        Это прямое требование ТЗ 4.1: «скрытие кнопок только средствами CSS не допускается».
+      </span>
+    </div>
+
+    <div class="notice notice--warn">
+      <span class="notice__icon">⏳</span>
+      <span class="notice__body">
+        <b class="notice__title">Состояние работы</b>
+        Собрано 6 страниц из 35. Остальные перечислены ниже как запланированные —
+        порядок производства и приоритеты в <code>docs/04-пробелы.md</code>,
+        соглашения по вёрстке в <code>docs/06-производство.md</code>.
+      </span>
+    </div>
+
+    <div class="pindex__group">
+      <h2>Собрано</h2>
+      <div class="pindex__list">
+        <a class="pindex__item" href="home.html">
+          <span class="pindex__name">Главная</span><span class="pindex__url">/</span>
+          <span class="pindex__note">Первый экран с живым счётчиком, полоса фактов, «Коротко», поступления, 9 категорий, подбор по задаче, акции, второй этаж, журнал, опт, Telegram, вопросы, контакты.</span>
+          <span class="pindex__states"><span class="pindex__state">3 роли</span><span class="pindex__state">адаптив</span></span>
+        </a>
+        <a class="pindex__item" href="catalog.html">
+          <span class="pindex__name">Каталог</span><span class="pindex__url">/catalog/</span>
+          <span class="pindex__note">Девять категорий, «Часто берут», таблица «Что нужно знать о каталоге».</span>
+          <span class="pindex__states"><span class="pindex__state">3 роли</span></span>
+        </a>
+        <a class="pindex__item" href="category.html">
+          <span class="pindex__name">Категория — Сыры</span><span class="pindex__url">/catalog/сыры/</span>
+          <span class="pindex__note">Панель фильтров со счётчиком до применения, метки подкатегорий, список, «Как выбрать» со сравнительной таблицей.</span>
+          <span class="pindex__states"><span class="pindex__state">3 роли</span><span class="pindex__state">шторка фильтров</span></span>
+        </a>
+        <a class="pindex__item" href="product.html">
+          <span class="pindex__name">Карточка товара</span><span class="pindex__url">/product/пармиджано-24/</span>
+          <span class="pindex__note">Галерея, характеристики, заметка продавца, «С чем сочетать», «Чем заменить». Блок цены и действия — в трёх вариантах роли.</span>
+          <span class="pindex__states"><span class="pindex__state">3 роли</span></span>
+        </a>
+        <a class="pindex__item" href="alcohol.html">
+          <span class="pindex__name">Алкогольная витрина</span><span class="pindex__url">/catalog/алкоголь/</span>
+          <span class="pindex__note">Два состояния и две формулировки плашки. Показан и третий случай: оптовик + позиция без признака доступности оптового заказа.</span>
+          <span class="pindex__states"><span class="pindex__state">2 состояния</span><span class="pindex__state">расхождение ТЗ/Структуры</span></span>
+        </a>
+        <a class="pindex__item" href="product-alcohol.html">
+          <span class="pindex__name">Карточка алкогольного товара</span><span class="pindex__url">/product/эль-тёмный/</span>
+          <span class="pindex__note">Плашка стоит вплотную к цене. «С чем сочетать» — только неалкогольные позиции.</span>
+          <span class="pindex__states"><span class="pindex__state">2 состояния</span></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="pindex__group">
+      <h2>Запланировано — публичная витрина</h2>
+      <p class="pindex__lead">Каркас-донор в Organi есть у отмеченных; остальные собираются из секций-доноров (docs/03, п. 3.3).</p>
+      <div class="pindex__list">
+        <span class="pindex__item"><span class="pindex__name">Акции</span><span class="pindex__url">/promotions/</span><span class="pindex__note">Карточки с обратным отсчётом + архив завершённых. Состояние «только архив».</span></span>
+        <span class="pindex__item"><span class="pindex__name">Карточка акции</span><span class="pindex__url">/promotions/хамон-15/</span><span class="pindex__note">Точные даты, условия, товары-участники.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Новинки</span><span class="pindex__url">/new/</span><span class="pindex__note">Поступления по неделям с датой приёмки.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Подарочные наборы</span><span class="pindex__url">/gifts/</span><span class="pindex__note">Подбор по бюджету и поводу, наборы с раскрытым составом.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Результаты поиска</span><span class="pindex__url">/search/</span><span class="pindex__note">Вкладки, подсказка о синонимах, пустой результат. 3 состояния.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Журнал</span><span class="pindex__url">/journal/</span><span class="pindex__note">Донор: blog_gird_2.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Рубрика журнала</span><span class="pindex__url">/journal/советы-по-выбору/</span><span class="pindex__note">Донор: blog_list.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Публикация журнала</span><span class="pindex__url">/journal/сырная-тарелка/</span><span class="pindex__note">Донор: blog_detail + оглавление сбоку, связанные товары, карточка автора.</span></span>
+        <span class="pindex__item"><span class="pindex__name">О гастромаркете</span><span class="pindex__url">/about/</span><span class="pindex__note">Зелёное поле, три части формата, таблица принципов, команда витрины.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Второй этаж</span><span class="pindex__url">/second-floor/</span><span class="pindex__note">Фотолента, четыре шага, правила (до утверждения магазином блок не выводится).</span></span>
+        <span class="pindex__item"><span class="pindex__name">Контакты</span><span class="pindex__url">/contacts/</span><span class="pindex__note">Донор: contact_us. Таблица режима, отдельный контакт оптового отдела, реквизиты.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Юридические страницы</span><span class="pindex__url">/legal/…</span><span class="pindex__note">Оглавление сбоку, дата редакции, смежные документы.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Страница не найдена</span><span class="pindex__url">/404</span><span class="pindex__note">2 сценария: адрес изменился / товар ушёл с витрины.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Служебное сообщение</span><span class="pindex__url">/message/…</span><span class="pindex__note">Один шаблон, 5 случаев.</span></span>
+      </div>
+    </div>
+
+    <div class="pindex__group">
+      <h2>Запланировано — оптовый контур</h2>
+      <div class="pindex__list">
+        <span class="pindex__item"><span class="pindex__name">Оптовым покупателям</span><span class="pindex__url">/wholesale/</span><span class="pindex__note">8 секций, включая блок «Чего у нас нет».</span></span>
+        <span class="pindex__item"><span class="pindex__name">Регистрация оптовика</span><span class="pindex__url">/wholesale/register/</span><span class="pindex__note">13 полей, маски ИНН/КПП/телефона, раздельные согласия, «Что дальше».</span></span>
+        <span class="pindex__item"><span class="pindex__name">Статус заявки</span><span class="pindex__url">/wholesale/status/</span><span class="pindex__note">3 состояния: на проверке / подтверждена / отклонена с причиной.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Вход</span><span class="pindex__url">/login/</span><span class="pindex__note">3 состояния: обычный / единая ошибка / временная блокировка.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Оптовая корзина</span><span class="pindex__url">/cart/</span><span class="pindex__note">4 состояния. Две цены в строке, предупреждение об изменении цены, предоплата, минимальная сумма.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Оформление заказа</span><span class="pindex__url">/checkout/</span><span class="pindex__note">Шаги, реквизиты только для просмотра, крупная плашка «онлайн-оплаты нет».</span></span>
+        <span class="pindex__item"><span class="pindex__name">Заказ оформлен</span><span class="pindex__url">/checkout/received/…</span><span class="pindex__note">3 состояния: счёт готов / формируется / ошибка формирования.</span></span>
+      </div>
+    </div>
+
+    <div class="pindex__group">
+      <h2>Запланировано — личный кабинет</h2>
+      <p class="pindex__lead">Донора в Organi нет ни у одной из восьми страниц.</p>
+      <div class="pindex__list">
+        <span class="pindex__item"><span class="pindex__name">Кабинет — обзор</span><span class="pindex__url">/account/</span><span class="pindex__note">Приветствие с условиями, предупреждение о неоплаченных счетах, сводка, последние заказы, повтор заказа.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Профиль и реквизиты</span><span class="pindex__url">/account/profile/</span><span class="pindex__note">Данные организации, банковские реквизиты, контактное лицо.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Мои условия</span><span class="pindex__url">/account/terms/</span><span class="pindex__note">Сводка, действующие условия, «Как считается цена» на конкретном примере.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Акции и промокоды</span><span class="pindex__url">/account/promotions/</span><span class="pindex__note">Персональные коды, закрытые акции группы, история использования.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Заказы</span><span class="pindex__url">/account/orders/</span><span class="pindex__note">Фильтры по статусу, таблица со ссылкой на счёт.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Заказ — подробно</span><span class="pindex__url">/account/orders/…</span><span class="pindex__note">Шкала статусов, состав, расчёт, счёт с версиями, история изменений.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Счета</span><span class="pindex__url">/account/invoices/</span><span class="pindex__note">Предупреждение о сроке, все версии, реквизиты для оплаты с копированием.</span></span>
+        <span class="pindex__item"><span class="pindex__name">Пароль и безопасность</span><span class="pindex__url">/account/security/</span><span class="pindex__note">Смена пароля, последние входы, выход с сохранением корзины.</span></span>
+      </div>
+    </div>
+
+    <div class="pindex__group">
+      <h2>Служебное</h2>
+      <div class="pindex__list">
+        <span class="pindex__item"><span class="pindex__name">Стайлгайд</span><span class="pindex__url">styleguide.html</span><span class="pindex__note">Палитра, шкала, сетка и все ~25 компонентов в 37 состояниях. Первая задача следующего исполнителя.</span></span>
+      </div>
+    </div>
+  </div>
+</section>

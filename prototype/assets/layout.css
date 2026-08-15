@@ -205,14 +205,15 @@
 }
 .listbar__count { font-size: var(--fs-sm); color: var(--muted); }
 .listbar__count b { color: var(--ink); font-family: var(--font-mono); font-weight: 500; }
-.listbar__tools { display: flex; align-items: center; gap: var(--s2); }
+.listbar__tools { display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
 .viewswitch { display: flex; gap: 4px; }
 .viewswitch button {
   width: 40px; height: 40px; border: 1px solid var(--line-strong); border-radius: var(--r-sm);
   background: var(--white); color: var(--ink-strong); cursor: pointer;
 }
 .viewswitch button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--white); }
-.listbar .select { min-height: 40px; padding: 8px 40px 8px 14px; width: auto; font-size: var(--fs-sm); }
+.listbar .select { min-height: 40px; padding: 8px 40px 8px 14px; width: auto; max-width: 100%; font-size: var(--fs-sm); }
+@media (max-width: 576px) { .listbar__tools { width: 100%; } .listbar .select { flex: 1 1 100%; } }
 
 /* Мобильная шторка фильтров */
 .filters-toggle { display: none; }

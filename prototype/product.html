@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пармиджано Реджано 24 мес. — Foodbeer</title>
+<meta name="description" content="">
+<!-- Шрифты лежат рядом: страницы открываются двойным кликом без интернета -->
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/design-system.css">
+<link rel="stylesheet" href="assets/components.css">
+<link rel="stylesheet" href="assets/layout.css">
+<link rel="stylesheet" href="assets/decor.css">
+<link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body class="">
+
+<!-- Служебная полоса. Статус считается из расписания, а не пишется руками. -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <div class="topbar__group">
+      <span class="topbar__item">📍 <a href="contacts.html">Волгоград, [адрес — заполняется перед запуском]</a></span>
+      <span class="topbar__item topbar__hide-sm">
+        <span class="status status--work">Открыто до 21:00</span>
+      </span>
+    </div>
+    <div class="topbar__group">
+      <span class="topbar__item topbar__hide-sm">☎ <a href="tel:+70000000000">[телефон]</a></span>
+      <span class="topbar__item">✈ <a href="#" rel="noopener">Telegram-канал</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- Шапка. Три состояния роли. Разметка для чужой роли лежит в <template>
+     и в DOM не попадает — это не CSS-скрытие (ТЗ 4.1). -->
+<header class="header">
+  <div class="container header__main">
+    <a class="logo" href="index.html">
+      <span class="logo__name">Food<b>beer</b></span>
+      <span class="logo__tag">гастромаркет</span>
+    </a>
+
+    <div style="position:relative">
+      <button class="header__catalog" type="button" data-catalog-toggle aria-haspopup="true">
+        ☰ <span>Каталог</span>
+      </button>
+      <div class="catalog-menu" data-catalog-menu hidden>
+        <div class="catalog-menu__grid">
+          <a class="catalog-menu__item" href="category.html">Сыры <span class="catalog-menu__count">44</span></a>
+          <a class="catalog-menu__item" href="category.html">Мясные деликатесы <span class="catalog-menu__count">38</span></a>
+          <a class="catalog-menu__item" href="category.html">Рыбные деликатесы <span class="catalog-menu__count">21</span></a>
+          <a class="catalog-menu__item" href="category.html">Закуски и антипасти <span class="catalog-menu__count">52</span></a>
+          <a class="catalog-menu__item" href="category.html">Десерты и сладости <span class="catalog-menu__count">33</span></a>
+          <a class="catalog-menu__item" href="category.html">Чай, кофе и бакалея <span class="catalog-menu__count">29</span></a>
+          <a class="catalog-menu__item" href="category.html">Безалкогольные напитки <span class="catalog-menu__count">18</span></a>
+          <a class="catalog-menu__item" href="gifts.html">Подарки и наборы <span class="catalog-menu__count">12</span></a>
+          <a class="catalog-menu__item" href="alcohol.html">Алкогольная витрина <span class="catalog-menu__count">26</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="search">
+      <label class="u-sr" for="q">Поиск по каталогу</label>
+      <input class="search__input" id="q" type="search" placeholder="Пармезан, хамон, тоник…" data-search-input>
+      <button class="search__submit" type="button" aria-label="Найти">🔍</button>
+      <div class="search__suggest" data-search-suggest hidden>
+        <div class="search__group">Товары</div>
+        <a class="search__row" href="product.html">
+          <span class="search__row-name">Пармиджано Реджано 24 мес.</span>
+          <span class="search__row-price">от 690 ₽ / 100 г</span>
+        </a>
+        <a class="search__row" href="product.html">
+          <span class="search__row-name">Хамон Серрано, нарезка</span>
+          <span class="search__row-price">от 540 ₽ / 100 г</span>
+        </a>
+        <div class="search__group">Категории</div>
+        <a class="search__row" href="category.html"><span class="search__row-name">Сыры</span>
+          <span class="search__row-price">44 позиции</span></a>
+      </div>
+    </div>
+
+    <div class="header__user">
+      <!-- ГОСТЬ -->
+      <template data-role-only="guest">
+        <div class="user-guest">
+          <a class="btn btn--secondary btn--sm" href="login.html">Войти</a>
+          <a class="btn btn--primary btn--sm" href="wholesale.html">Опт</a>
+        </div>
+      </template>
+
+      <!-- ЗАЯВИТЕЛЬ: видит состояние своей заявки -->
+      <template data-role-only="applicant">
+        <a class="user-applicant" href="wholesale-status.html">
+          <span class="status-big__dot" style="width:10px;height:10px;flex:0 0 10px;background:var(--warn)"></span>
+          <span>
+            <span class="user-applicant__label">Заявка на опт</span>
+            <span class="user-applicant__state">На проверке</span>
+          </span>
+        </a>
+      </template>
+
+      <!-- ПОДТВЕРЖДЁННЫЙ ОПТОВИК: организация, скидка, корзина с суммой -->
+      <template data-role-only="wholesale">
+        <div class="user-wholesale">
+          <a class="user-wholesale__org" href="account.html" style="text-decoration:none">
+            <span class="user-wholesale__name">ООО «Траттория»</span>
+            <span class="user-wholesale__discount">персональная скидка 12 %</span>
+          </a>
+          <a class="mini-cart" href="cart.html">
+            🧺 <span class="mini-cart__sum">48 250 ₽</span>
+            <span class="mini-cart__count">7</span>
+          </a>
+        </div>
+      </template>
+    </div>
+  </div>
+
+  <nav class="header__nav" aria-label="Основное меню">
+    <div class="container header__nav-inner">
+      <a href="index.html">Все страницы</a>
+      <a href="home.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="promotions.html">Акции</a>
+      <a href="new.html">Новинки</a>
+      <a href="gifts.html">Подарочные наборы</a>
+      <a href="second-floor.html">Второй этаж</a>
+      <a href="journal.html">Журнал</a>
+      <a href="about.html">О гастромаркете</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="wholesale.html" data-role-hide="wholesale">Оптовым покупателям</a>
+      <template data-role-only="wholesale"><a href="account.html">Личный кабинет</a></template>
+    </div>
+  </nav>
+</header>
+
+
+<main id="main">
+<section class="pagehead">
+  <div class="container">
+    <h1>Пармиджано Реджано 24 мес.</h1>
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="home.html">Главная</a>
+      <span class="crumbs__sep">›</span>
+      <a href="catalog.html">Каталог</a><span class="crumbs__sep">›</span><a href="category.html">Сыры</a><span class="crumbs__sep">›</span>
+      <span aria-current="page">Пармиджано Реджано 24 мес.</span>
+    </nav>
+  </div>
+</section>
+
+
+<section class="section section--cool">
+  <div class="container">
+    <div class="grid grid-2" style="align-items:start">
+
+      <!-- ГАЛЕРЕЯ -->
+      <div>
+        <script class="ann" type="application/json">
+        {"section":"Галерея",
+         "what":"Основное изображение и несколько дополнительных.",
+         "how":"Изображения приходят из учётной системы вместе с остальными данными товара.",
+         "why":"В гастрономии решение принимается глазами: видна ли текстура среза, как выглядит корка.",
+         "src":"«Структура», Карточка товара"}
+        </script>
+        <div style="display:grid;grid-template-columns:96px 1fr;gap:var(--s2)">
+          <div style="display:flex;flex-direction:column;gap:var(--s2)">
+            <span class="ph" style="aspect-ratio:1;min-height:0;background:#fff;border:1px solid var(--green);padding:8px">
+              <img src="assets/products/01-syry/syr-tverdyy-vyderzhannyy.png" alt="" style="object-fit:contain;mix-blend-mode:multiply">
+            </span>
+            <span class="ph ph--1x1" style="min-height:0">Срез</span>
+            <span class="ph ph--1x1" style="min-height:0">Корка</span>
+          </div>
+          <div style="background:#fff;border-radius:var(--r-md);padding:var(--s4);display:flex;align-items:center;justify-content:center">
+            <img src="assets/products/01-syry/syr-tverdyy-vyderzhannyy.png" alt="Пармиджано Реджано 24 мес." style="mix-blend-mode:multiply">
+          </div>
+        </div>
+      </div>
+
+      <!-- НАЗВАНИЕ, ДАННЫЕ, ЦЕНА, ДЕЙСТВИЕ -->
+      <div>
+        <script class="ann" type="application/json">
+        {"section":"Название и строка данных",
+         "what":"Название, артикул, производитель, страна и регион.",
+         "how":"Поля, по которым нет подтверждённых данных, не выводятся вообще — ни прочерком, ни заглушкой.",
+         "why":"Придуманный регион или состав — прямой репутационный и юридический риск. Лучше пустое место, чем догадка.",
+         "src":"«Структура», Карточка товара"}
+        </script>
+
+        <span class="tag tag--green u-mb2" style="display:inline-flex">Сыры · Твёрдые</span>
+        <h1 class="u-mb2" style="font-size:var(--fs-h1);line-height:var(--lh-h1)">Пармиджано Реджано 24 мес.</h1>
+
+        <div class="facts facts--inline u-mb3" style="font-size:var(--fs-sm)">
+          <div class="fact"><span class="fact__label">Артикул</span><span class="fact__value u-mono" style="font-size:var(--fs-sm)">SYR-0142</span></div>
+          <div class="fact"><span class="fact__label">Страна</span><span class="fact__value" style="font-size:var(--fs-sm)">Италия</span></div>
+          <div class="fact"><span class="fact__label">Регион</span><span class="fact__value" style="font-size:var(--fs-sm)">Эмилия-Романья</span></div>
+          <div class="fact"><span class="fact__label">Производитель</span><span class="fact__value" style="font-size:var(--fs-sm)">Consorzio Parmigiano</span></div>
+        </div>
+
+        <script class="ann" type="application/json">
+        {"section":"Цена, наличие и действие",
+         "what":"Цена с явной единицей, статус наличия и кнопка, зависящая от роли.",
+         "how":"Гость видит «Подробнее» и напоминание, что товар забирают в магазине. Подтверждённый оптовик — количество, кнопку «В корзину», свою цену рядом с зачёркнутой розничной. Кнопок покупки у публичного посетителя нет в разметке.",
+         "why":"Одна карточка обслуживает розницу и опт, не создавая двух версий сайта и двух источников расхождений в цене.",
+         "src":"«Структура», Карточка товара; ТЗ 4.1, 10.2, 10.3"}
+        </script>
+
+        <div class="card u-mb3" style="background:#fff">
+          <!-- ГОСТЬ И ЗАЯВИТЕЛЬ -->
+          <template data-role-only="guest applicant">
+            <div class="price u-mb2">
+              <span class="price__value" style="font-size:var(--fs-h1);line-height:1">690 ₽</span>
+              <span class="price__unit" style="font-size:var(--fs-body)">за 100 г</span>
+            </div>
+            <p class="u-mb3" style="font-size:var(--fs-sm)">
+              Весовая позиция: режем при вас, итоговая сумма считается по фактическому весу.
+            </p>
+            <span class="product__stock u-mb3" style="display:flex">В наличии, витрина обновлена сегодня в 14:20</span>
+            <div class="notice notice--info u-mb0">
+              <span class="notice__icon">🏬</span>
+              <span class="notice__body">
+                <b class="notice__title">Товар забирают в магазине</b>
+                Дистанционный заказ для частных лиц не оформляется и доставки нет.
+                Приходите — отрежем нужный кусок и упакуем.
+              </span>
+            </div>
+            <div style="display:flex;gap:var(--s2);flex-wrap:wrap;margin-top:var(--s3)">
+              <a class="btn btn--primary" href="contacts.html">Как доехать →</a>
+              <a class="btn btn--secondary" href="wholesale.html">Нужен опт?</a>
+            </div>
+          </template>
+
+          <!-- ПОДТВЕРЖДЁННЫЙ ОПТОВИК -->
+          <template data-role-only="wholesale">
+            <div class="price-pair u-mb3">
+              <div class="price price--retail">
+                <span class="price__value">690 ₽</span>
+                <span class="price__unit">розничная цена за 100 г</span>
+              </div>
+              <div class="price price--personal">
+                <span class="price__value" style="font-size:var(--fs-h1);line-height:1">607 ₽</span>
+                <span class="price__unit" style="font-size:var(--fs-body)">ваша цена за 100 г · скидка 12 %</span>
+              </div>
+            </div>
+            <span class="product__stock u-mb3" style="display:flex">В наличии: 14 кг на складе</span>
+            <div style="display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center" class="u-mb3">
+              <div class="qty" data-step="100" data-min="100" data-unit="г">
+                <button type="button" data-qty="down" aria-label="Меньше">−</button>
+                <span class="qty__value">500 г</span>
+                <button type="button" data-qty="up" aria-label="Больше">+</button>
+              </div>
+              <button class="btn btn--primary btn--lg" type="button">В корзину</button>
+            </div>
+            <div class="notice notice--warn u-mb0">
+              <span class="notice__icon">🧾</span>
+              <span class="notice__body">
+                Онлайн-оплаты нет. После оформления заказа формируется счёт на предоплату,
+                заказ забирается со склада.
+              </span>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <p class="brief">
+      Пармиджано Реджано 24 месяцев выдержки — твёрдый сыр из непастеризованного коровьего
+      молока, Эмилия-Романья. К двум годам созревания приобретает ломкую структуру,
+      заметные кристаллы соли и ореховый тон. Цена — 690 рублей за 100 граммов,
+      позиция весовая, режется при покупке. В наличии 14 килограммов, данные из учётной
+      системы обновлены сегодня.
+    </p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="grid grid-2" style="align-items:start">
+      <div>
+        <script class="ann" type="application/json">
+        {"section":"Характеристики",
+         "what":"Таблица: тип, молоко, выдержка, регион, формат продажи, хранение, срок годности.",
+         "how":"Только подтверждённые значения, заполняются в учётной системе. Незаполненные строки не выводятся вообще.",
+         "why":"Таблица читается взглядом и чаще всего попадает в прямые ответы поисковых систем — сплошной абзац с теми же данными не попадает.",
+         "src":"«Структура», Карточка товара"}
+        </script>
+        <h2 class="u-mb3">Характеристики</h2>
+        <div class="table-wrap">
+          <table class="table table--spec table--cards">
+            <tr><th>Тип</th><td data-label="Тип">Твёрдый, длительной выдержки</td></tr>
+            <tr><th>Молоко</th><td data-label="Молоко">Коровье, непастеризованное</td></tr>
+            <tr><th>Выдержка</th><td data-label="Выдержка">24 месяца</td></tr>
+            <tr><th>Регион</th><td data-label="Регион">Эмилия-Романья, Италия</td></tr>
+            <tr><th>Формат продажи</th><td data-label="Формат">Весовой, режем при вас</td></tr>
+            <tr><th>Хранение</th><td data-label="Хранение">+2…+6 °C, в бумаге</td></tr>
+            <tr><th>Срок годности</th><td data-label="Срок">90 суток при соблюдении условий хранения</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <script class="ann" type="application/json">
+        {"section":"Заметка продавца",
+         "what":"Личное наблюдение того, кто стоит за витриной: на что похож вкус, чем отличается от соседней выдержки, что учесть при покупке.",
+         "how":"Подписана именем и должностью, с датой обновления. Тот же человек есть в блоке «Команда витрины» на странице «О гастромаркете».",
+         "why":"Единственный контент в карточке, которого нет ни у производителя, ни у маркетплейсов. Именно за ним приходят и именно его цитируют.",
+         "src":"«Структура», Карточка товара"}
+        </script>
+        <h2 class="u-mb3">Заметка продавца</h2>
+        <div class="card card--raised">
+          <p class="u-mb3">
+            От шестнадцатимесячного отличается заметно: там ещё пластичность и молоко,
+            здесь уже ломкость и соль на изломе. Если берёте на тарелку — кладите
+            последним из твёрдых, перед голубой плесенью. Если на пасту — хватит
+            и шестнадцати месяцев, разница в тёртом виде почти не читается,
+            а цена отличается в полтора раза.
+          </p>
+          <div class="media-row media-row--sm" style="align-items:center">
+            <span class="ph" style="width:64px;height:64px;border-radius:50%;min-height:0">Фото</span>
+            <div>
+              <b class="u-ink">[Имя сотрудника]</b><br>
+              <span style="font-size:var(--fs-caption);color:var(--muted)">
+                Сырная витрина · заметка обновлена 12 августа 2026
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--food-pattern">
+  <script class="ann" type="application/json">
+  {"section":"С чем сочетать",
+   "what":"Товары и материалы журнала, подходящие к этой позиции.",
+   "how":"Подбирается по данным каталога, проверяется на наличие перед показом. Алкогольные позиции в публичную подборку не попадают.",
+   "why":"Увеличивает средний чек естественным образом: человек и так думает, что взять к сыру.",
+   "src":"«Структура», Карточка товара"}
+  </script>
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">К этой позиции</span><h2>С чем сочетать</h2></div>
+    <div class="grid grid-4">
+      <!-- Плитка товара. Два варианта из трёх: публичный и оптовый.
+     Публичному посетителю кнопки покупки НЕ отрисовываются: они лежат
+     в <template>, содержимое которого браузер в DOM не помещает. -->
+<article class="product">
+  <div class="product__media">
+    <div class="product__badges">
+      <span class="tag">Десерты</span>
+      
+    </div>
+    <img src="assets/products/05-deserty-i-sladosti/dzhem-klubnichnyy.png" alt="Джем клубничный" loading="lazy">
+  </div>
+  <div class="product__body">
+    <p class="product__origin">Италия · La Dispensa</p>
+    <h3 class="product__name"><a href="product.html">Джем клубничный</a></h3>
+
+    <!-- Цена ВСЕГДА с единицей измерения -->
+    <template data-role-only="guest applicant">
+      <div class="price">
+        <span class="price__value">290 ₽</span>
+        <span class="price__unit">за шт</span>
+      </div>
+    </template>
+    <template data-role-only="wholesale">
+      <div class="price-pair">
+        <div class="price price--retail">
+          <span class="price__value">290 ₽</span>
+          <span class="price__unit">розница за шт</span>
+        </div>
+        <div class="price price--personal">
+          <span class="price__value">255 ₽</span>
+          <span class="price__unit">ваша цена за шт</span>
+        </div>
+      </div>
+    </template>
+
+    <span class="product__stock">В наличии</span>
+
+    <div class="product__foot">
+      <!-- Публичный посетитель: единственное действие — перейти в карточку -->
+      <template data-role-only="guest applicant">
+        <a class="product__more" href="product.html">Подробнее →</a>
+      </template>
+      <!-- Подтверждённый оптовик: количество и «В корзину» -->
+      <template data-role-only="wholesale">
+        <div class="product__buy">
+          <div class="qty" data-unit="" data-step="1" data-min="1">
+            <button type="button" data-qty="down" aria-label="Меньше">−</button>
+            <span class="qty__value">1</span>
+            <button type="button" data-qty="up" aria-label="Больше">+</button>
+          </div>
+          <button class="btn btn--primary" type="button">В корзину</button>
+        </div>
+      </template>
+    </div>
+  </div>
+</article>
+
+      <!-- Плитка товара. Два варианта из трёх: публичный и оптовый.
+     Публичному посетителю кнопки покупки НЕ отрисовываются: они лежат
+     в <template>, содержимое которого браузер в DOM не помещает. -->
+<article class="product">
+  <div class="product__media">
+    <div class="product__badges">
+      <span class="tag">Закуски</span>
+      
+    </div>
+    <img src="assets/products/04-zakuski-i-antipasti/krekery.png" alt="Крекеры с морской солью" loading="lazy">
+  </div>
+  <div class="product__body">
+    <p class="product__origin">Италия · Grissini Co</p>
+    <h3 class="product__name"><a href="product.html">Крекеры с морской солью</a></h3>
+
+    <!-- Цена ВСЕГДА с единицей измерения -->
+    <template data-role-only="guest applicant">
+      <div class="price">
+        <span class="price__value">210 ₽</span>
+        <span class="price__unit">за упаковку</span>
+      </div>
+    </template>
+    <template data-role-only="wholesale">
+      <div class="price-pair">
+        <div class="price price--retail">
+          <span class="price__value">210 ₽</span>
+          <span class="price__unit">розница за упаковку</span>
+        </div>
+        <div class="price price--personal">
+          <span class="price__value">185 ₽</span>
+          <span class="price__unit">ваша цена за упаковку</span>
+        </div>
+      </div>
+    </template>
+
+    <span class="product__stock">В наличии</span>
+
+    <div class="product__foot">
+      <!-- Публичный посетитель: единственное действие — перейти в карточку -->
+      <template data-role-only="guest applicant">
+        <a class="product__more" href="product.html">Подробнее →</a>
+      </template>
+      <!-- Подтверждённый оптовик: количество и «В корзину» -->
+      <template data-role-only="wholesale">
+        <div class="product__buy">
+          <div class="qty" data-unit="" data-step="1" data-min="1">
+            <button type="button" data-qty="down" aria-label="Меньше">−</button>
+            <span class="qty__value">1</span>
+            <button type="button" data-qty="up" aria-label="Больше">+</button>
+          </div>
+          <button class="btn btn--primary" type="button">В корзину</button>
+        </div>
+      </template>
+    </div>
+  </div>
+</article>
+
+      <!-- Плитка товара. Два варианта из трёх: публичный и оптовый.
+     Публичному посетителю кнопки покупки НЕ отрисовываются: они лежат
+     в <template>, содержимое которого браузер в DOM не помещает. -->
+<article class="product">
+  <div class="product__media">
+    <div class="product__badges">
+      <span class="tag">Мясные деликатесы</span>
+      
+    </div>
+    <img src="assets/products/02-myasnye-delikatesy/prshutto-narezka.png" alt="Прошутто ди Парма, нарезка" loading="lazy">
+  </div>
+  <div class="product__body">
+    <p class="product__origin">Италия · Parma Food</p>
+    <h3 class="product__name"><a href="product.html">Прошутто ди Парма, нарезка</a></h3>
+
+    <!-- Цена ВСЕГДА с единицей измерения -->
+    <template data-role-only="guest applicant">
+      <div class="price">
+        <span class="price__value">590 ₽</span>
+        <span class="price__unit">за 100 г</span>
+      </div>
+    </template>
+    <template data-role-only="wholesale">
+      <div class="price-pair">
+        <div class="price price--retail">
+          <span class="price__value">590 ₽</span>
+          <span class="price__unit">розница за 100 г</span>
+        </div>
+        <div class="price price--personal">
+          <span class="price__value">519 ₽</span>
+          <span class="price__unit">ваша цена за 100 г</span>
+        </div>
+      </div>
+    </template>
+
+    <span class="product__stock">В наличии</span>
+
+    <div class="product__foot">
+      <!-- Публичный посетитель: единственное действие — перейти в карточку -->
+      <template data-role-only="guest applicant">
+        <a class="product__more" href="product.html">Подробнее →</a>
+      </template>
+      <!-- Подтверждённый оптовик: количество и «В корзину» -->
+      <template data-role-only="wholesale">
+        <div class="product__buy">
+          <div class="qty" data-unit="" data-step="1" data-min="1">
+            <button type="button" data-qty="down" aria-label="Меньше">−</button>
+            <span class="qty__value">1</span>
+            <button type="button" data-qty="up" aria-label="Больше">+</button>
+          </div>
+          <button class="btn btn--primary" type="button">В корзину</button>
+        </div>
+      </template>
+    </div>
+  </div>
+</article>
+
+      <!-- Плитка товара. Два варианта из трёх: публичный и оптовый.
+     Публичному посетителю кнопки покупки НЕ отрисовываются: они лежат
+     в <template>, содержимое которого браузер в DOM не помещает. -->
+<article class="product">
+  <div class="product__media">
+    <div class="product__badges">
+      <span class="tag">Бакалея</span>
+      
+    </div>
+    <img src="assets/products/06-chay-kofe-bakaleya/maslo-olivkovoe.png" alt="Масло оливковое Extra Virgin" loading="lazy">
+  </div>
+  <div class="product__body">
+    <p class="product__origin">Италия · Frantoio</p>
+    <h3 class="product__name"><a href="product.html">Масло оливковое Extra Virgin</a></h3>
+
+    <!-- Цена ВСЕГДА с единицей измерения -->
+    <template data-role-only="guest applicant">
+      <div class="price">
+        <span class="price__value">890 ₽</span>
+        <span class="price__unit">за бутылку</span>
+      </div>
+    </template>
+    <template data-role-only="wholesale">
+      <div class="price-pair">
+        <div class="price price--retail">
+          <span class="price__value">890 ₽</span>
+          <span class="price__unit">розница за бутылку</span>
+        </div>
+        <div class="price price--personal">
+          <span class="price__value">783 ₽</span>
+          <span class="price__unit">ваша цена за бутылку</span>
+        </div>
+      </div>
+    </template>
+
+    <span class="product__stock">В наличии</span>
+
+    <div class="product__foot">
+      <!-- Публичный посетитель: единственное действие — перейти в карточку -->
+      <template data-role-only="guest applicant">
+        <a class="product__more" href="product.html">Подробнее →</a>
+      </template>
+      <!-- Подтверждённый оптовик: количество и «В корзину» -->
+      <template data-role-only="wholesale">
+        <div class="product__buy">
+          <div class="qty" data-unit="" data-step="1" data-min="1">
+            <button type="button" data-qty="down" aria-label="Меньше">−</button>
+            <span class="qty__value">1</span>
+            <button type="button" data-qty="up" aria-label="Больше">+</button>
+          </div>
+          <button class="btn btn--primary" type="button">В корзину</button>
+        </div>
+      </template>
+    </div>
+  </div>
+</article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <script class="ann" type="application/json">
+  {"section":"Чем заменить",
+   "what":"Аналоги той же категории и близкой цены.",
+   "how":"Показывается всегда, а не только когда товар закончился.",
+   "why":"Когда позицию разбирают, посетитель обычно уходит. Готовая замена удерживает его и попутно связывает карточки между собой без ручной работы.",
+   "src":"«Структура», Карточка товара"}
+  </script>
+  <div class="container">
+    <div class="section-head"><h2>Чем заменить</h2></div>
+    <div class="grid grid-3">
+      <!-- Плитка товара. Два варианта из трёх: публичный и оптовый.
+     Публичному посетителю кнопки покупки НЕ отрисовываются: они лежат
+     в <template>, содержимое которого браузер в DOM не помещает. -->
+<article class="product">
+  <div class="product__media">
+    <div class="product__badges">
+      <span class="tag">Твёрдые</span>
+      
+    </div>
+    <img src="assets/products/01-syry/syr-tverdyy-vyderzhannyy.png" alt="Грана Падано 16 мес." loading="lazy">
+  </div>
+  <div class="product__body">
+    <p class="product__origin">Италия · Consorzio</p>
+    <h3 class="product__name"><a href="product.html">Грана Падано 16 мес.</a></h3>
+
+    <!-- Цена ВСЕГДА с единицей измерения -->
+    <template data-role-only="guest applicant">
+      <div class="price">
+        <span class="price__value">450 ₽</span>
+        <span class="price__unit">за 100 г</span>
+      </div>
+    </template>
+    <template data-role-only="wholesale">
+      <div class="price-pair">
+        <div class="price price--retail">
+          <span class="price__value">450 ₽</span>
+          <span class="price__unit">розница за 100 г</span>
+        </div>
+        <div class="price price--personal">
+          <span class="price__value">396 ₽</span>
+          <span class="price__unit">ваша цена за 100 г</span>
+        </div>
+      </div>
+    </template>
+
+    <span class="product__stock">В наличии</span>
+
+    <div class="product__foot">
+      <!-- Публичный посетитель: единственное действие — перейти в карточку -->
+      <template data-role-only="guest applicant">
+        <a class="product__more" href="product.html">Подробнее →</a>
+      </template>
+      <!-- Подтверждённый оптовик: количество и «В корзину» -->
+      <template data-role-only="wholesale">
+        <div class="product__buy">
+          <div class="qty" data-unit="" data-step="1" data-min="1">
+            <button type="button" data-qty="down" aria-label="Меньше">−</button>
+            <span class="qty__value">1</span>
+            <button type="button" data-qty="up" aria-label="Больше">+</button>
+          </div>
+          <button class="btn btn--primary" type="button">В корзину</button>
+        </div>
+      </template>
+    </div>
+  </div>
+</article>
+
+      <!-- Плитка товара. Два варианта из трёх: публичный и оптовый.
+     Публичному посетителю кнопки покупки НЕ отрисовываются: они лежат
+     в <template>, содержимое которого браузер в DOM не помещает. -->
+<article class="product">
+  <div class="product__media">
+    <div class="product__badges">
+      <span class="tag">С трюфелем</span>
+      
+    </div>
+    <img src="assets/products/01-syry/syr-s-tryufelem.png" alt="Качотта с трюфелем" loading="lazy">
+  </div>
+  <div class="product__body">
+    <p class="product__origin">Италия · Caseificio Umbra</p>
+    <h3 class="product__name"><a href="product.html">Качотта с трюфелем</a></h3>
+
+    <!-- Цена ВСЕГДА с единицей измерения -->
+    <template data-role-only="guest applicant">
+      <div class="price">
+        <span class="price__value">740 ₽</span>
+        <span class="price__unit">за 100 г</span>
+      </div>
+    </template>
+    <template data-role-only="wholesale">
+      <div class="price-pair">
+        <div class="price price--retail">
+          <span class="price__value">740 ₽</span>
+          <span class="price__unit">розница за 100 г</span>
+        </div>
+        <div class="price price--personal">
+          <span class="price__value">651 ₽</span>
+          <span class="price__unit">ваша цена за 100 г</span>
+        </div>
+      </div>
+    </template>
+
+    <span class="product__stock">В наличии</span>
+
+    <div class="product__foot">
+      <!-- Публичный посетитель: единственное действие — перейти в карточку -->
+      <template data-role-only="guest applicant">
+        <a class="product__more" href="product.html">Подробнее →</a>
+      </template>
+      <!-- Подтверждённый оптовик: количество и «В корзину» -->
+      <template data-role-only="wholesale">
+        <div class="product__buy">
+          <div class="qty" data-unit="" data-step="1" data-min="1">
+            <button type="button" data-qty="down" aria-label="Меньше">−</button>
+            <span class="qty__value">1</span>
+            <button type="button" data-qty="up" aria-label="Больше">+</button>
+          </div>
+          <button class="btn btn--primary" type="button">В корзину</button>
+        </div>
+      </template>
+    </div>
+  </div>
+</article>
+
+      <!-- Плитка товара. Два варианта из трёх: публичный и оптовый.
+     Публичному посетителю кнопки покупки НЕ отрисовываются: они лежат
+     в <template>, содержимое которого браузер в DOM не помещает. -->
+<article class="product">
+  <div class="product__media">
+    <div class="product__badges">
+      <span class="tag">Козьи</span>
+      
+    </div>
+    <img src="assets/products/01-syry/syr-kozyy-shevr.png" alt="Шевр выдержанный" loading="lazy">
+  </div>
+  <div class="product__body">
+    <p class="product__origin">Франция · Soignon</p>
+    <h3 class="product__name"><a href="product.html">Шевр выдержанный</a></h3>
+
+    <!-- Цена ВСЕГДА с единицей измерения -->
+    <template data-role-only="guest applicant">
+      <div class="price">
+        <span class="price__value">520 ₽</span>
+        <span class="price__unit">за 100 г</span>
+      </div>
+    </template>
+    <template data-role-only="wholesale">
+      <div class="price-pair">
+        <div class="price price--retail">
+          <span class="price__value">520 ₽</span>
+          <span class="price__unit">розница за 100 г</span>
+        </div>
+        <div class="price price--personal">
+          <span class="price__value">458 ₽</span>
+          <span class="price__unit">ваша цена за 100 г</span>
+        </div>
+      </div>
+    </template>
+
+    <span class="product__stock">В наличии</span>
+
+    <div class="product__foot">
+      <!-- Публичный посетитель: единственное действие — перейти в карточку -->
+      <template data-role-only="guest applicant">
+        <a class="product__more" href="product.html">Подробнее →</a>
+      </template>
+      <!-- Подтверждённый оптовик: количество и «В корзину» -->
+      <template data-role-only="wholesale">
+        <div class="product__buy">
+          <div class="qty" data-unit="" data-step="1" data-min="1">
+            <button type="button" data-qty="down" aria-label="Меньше">−</button>
+            <span class="qty__value">1</span>
+            <button type="button" data-qty="up" aria-label="Больше">+</button>
+          </div>
+          <button class="btn btn--primary" type="button">В корзину</button>
+        </div>
+      </template>
+    </div>
+  </div>
+</article>
+
+    </div>
+  </div>
+</section>
+
+<!-- Блок вопросов и ответов. Донор: Faqs, светлый вариант.
+     Первый ответ раскрыт, ответ читается без вопроса, текст в коде страницы. -->
+<section class="section section--tight has-decor">
+  <script class="ann" type="application/json">
+  {"section":"Блок вопросов и ответов",
+   "what":"Пять-восемь вопросов в той формулировке, в какой их задают вслух, с ответами на 40–60 слов.",
+   "how":"Первый ответ раскрыт, остальные свёрнуты. Ответ читается без вопроса. Размечен для поисковых систем. Текст лежит в коде страницы, а не подгружается скриптом.",
+   "why":"Закрывает вопросы, из-за которых обычно звонят в магазин, и одновременно претендует на прямой ответ в поиске.",
+   "src":"«Структура», сквозная секция"}
+  </script>
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Частые вопросы</span>
+      <h2>Вопросы об этой позиции</h2>
+    </div>
+    <div class="accordion" style="max-width:900px;margin:0 auto">
+      <details class="accordion__item" open>
+        <summary class="accordion__head">Сколько брать на четверых</summary>
+        <div class="accordion__body">На сырную тарелку как закуску считают 100–125 граммов на человека. Пармиджано в наборе из пяти сортов достаточно 100 граммов на всю компанию — он яркий и солёный, его берут понемногу. Если сыр идёт к пасте, на четыре порции уходит около 80 граммов тёртого.</div>
+      </details>
+      <details class="accordion__item">
+        <summary class="accordion__head">Чем отличается от Грана Падано</summary>
+        <div class="accordion__body">Грана Падано мягче по вкусу и дешевле примерно в полтора раза: 450 рублей против 690 за 100 граммов. Пармиджано Реджано выдерживается дольше, у него более ломкая структура и заметные кристаллы соли. В тёртом виде в горячем блюде разница почти не читается, на тарелке — читается отчётливо.</div>
+      </details>
+      <details class="accordion__item">
+        <summary class="accordion__head">Это весовой товар</summary>
+        <div class="accordion__body">Да. Цена 690 рублей указана за 100 граммов, сыр режется при вас на нужный кусок, итоговая сумма считается по фактическому весу. Минимального веса нет — можно взять и 80 граммов на пробу.</div>
+      </details>
+      <details class="accordion__item">
+        <summary class="accordion__head">Как хранить</summary>
+        <div class="accordion__body">При температуре от +2 до +6 °C, завернув в бумагу, а не в плёнку: в плёнке сыр задыхается и приобретает посторонний запах. Срок годности — 90 суток при соблюдении условий хранения, это подтверждённое значение из учётной системы.</div>
+      </details>
+      <details class="accordion__item">
+        <summary class="accordion__head">Можно ли заказать с доставкой</summary>
+        <div class="accordion__body">Нет. Частным лицам сайт заказ не оформляет и доставки нет — товар забирают в магазине. Подтверждённые оптовые покупатели оформляют заказ в личном кабинете, получают счёт на предоплату и забирают заказ со склада.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- Блок «Оптовым покупателям». Гостю и заявителю — виден,
+     у подтверждённого оптовика УДАЛЯЕТСЯ из DOM. -->
+<section class="section section--tight" data-role-hide="wholesale">
+  <script class="ann" type="application/json">
+  {"section":"Блок «Оптовым покупателям»",
+   "what":"Короткое предложение подать заявку с конкретикой: что даёт кабинет, за какой срок рассматривают, что нужно из документов.",
+   "how":"Показывается гостю и заявителю, у подтверждённого оптовика скрывается. В прототипе — удаляется из DOM, а не прячется стилями.",
+   "why":"Оптовый клиент часто заходит как обычный посетитель — из каталога или карточки. Блок ловит его там, где он есть, а не только на отдельном лендинге.",
+   "src":"«Структура», сквозная секция"}
+  </script>
+  <div class="container">
+    <div class="wholesale-cta">
+      <div>
+        <h2>Оптовым покупателям</h2>
+        <p style="color:rgba(255,255,255,.9)" class="u-mb3">
+          Ресторанам, барам, кофейням и небольшой рознице — персональные цены,
+          живые остатки и счёт на предоплату сразу после оформления.
+        </p>
+        <ul class="wholesale-cta__list">
+          <li>Заявку проверяет человек, обычно в течение 1 рабочего дня</li>
+          <li>Из документов нужны ИНН и реквизиты организации или ИП</li>
+          <li>Онлайн-оплаты нет: после заказа приходит счёт на предоплату</li>
+        </ul>
+      </div>
+      <div class="wholesale-cta__actions">
+        <a class="btn btn--secondary btn--lg" href="wholesale-register.html">Подать заявку</a>
+        <a class="btn btn--secondary btn--lg" href="wholesale.html">Условия и порядок</a>
+        <a class="btn btn--secondary btn--lg" href="login.html">Войти в кабинет</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__top-inner">
+        <a class="logo" href="index.html">
+          <span class="logo__name">Food<b>beer</b></span>
+          <span class="logo__tag">гастромаркет</span>
+        </a>
+        <p class="u-mb0" style="color:rgba(255,255,255,.65);max-width:46ch">
+          Витрина, на которой только то, что сегодня лежит на полке.
+        </p>
+        <a class="btn btn--primary" href="#" rel="noopener">Telegram-канал →</a>
+      </div>
+    </div>
+
+    <div class="footer__cols">
+      <div class="footer__col">
+        <div class="footer__col-title">Каталог</div>
+        <a href="category.html">Сыры</a>
+        <a href="category.html">Мясные деликатесы</a>
+        <a href="category.html">Рыбные деликатесы</a>
+        <a href="category.html">Закуски и антипасти</a>
+        <a href="category.html">Десерты и сладости</a>
+        <a href="category.html">Чай, кофе и бакалея</a>
+        <a href="category.html">Безалкогольные напитки</a>
+        <a href="gifts.html">Подарки и наборы</a>
+        <a href="alcohol.html">Алкогольная витрина</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Покупателям</div>
+        <a href="catalog.html">Каталог</a>
+        <a href="promotions.html">Акции</a>
+        <a href="new.html">Новинки</a>
+        <a href="second-floor.html">Второй этаж</a>
+        <a href="journal.html">Журнал</a>
+        <a href="search.html">Поиск</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Опт</div>
+        <a href="wholesale.html">Оптовые условия</a>
+        <a href="wholesale-register.html">Подать заявку</a>
+        <a href="wholesale-status.html">Статус заявки</a>
+        <a href="login.html">Вход в кабинет</a>
+        <a href="account.html">Личный кабинет</a>
+        <a href="account-invoices.html">Счета</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Контакты</div>
+        <div class="footer__contact">
+          <span><b>Адрес:</b> [заполняется перед запуском]</span>
+          <span><b>Режим:</b> пн–вс, 10:00–21:00</span>
+          <span><b>Телефон:</b> [заполняется]</span>
+          <span><b>Оптовый отдел:</b> [заполняется]</span>
+          <span><b>Telegram:</b> <a href="#">@foodbeer</a></span>
+        </div>
+        <p class="footer__req">
+          ИП [Ф.И.О.] · ИНН [—] · ОГРНИП [—]<br>
+          Реквизиты заполняются данными владельца перед запуском.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer__sync">
+      Цены и остатки обновляются из учётной системы 1С:УНФ. Последнее обновление — сегодня в 14:20.
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 Foodbeer</span>
+      <span>
+        <a href="legal.html">Политика обработки персональных данных</a> ·
+        <a href="legal.html">Пользовательское соглашение</a> ·
+        <a href="legal.html">Согласия</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="assets/prototype.js"></script>
+</body>
+</html>

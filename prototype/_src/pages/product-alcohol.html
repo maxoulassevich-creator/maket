@@ -1,0 +1,183 @@
+<!--meta
+{"title":"Эль тёмный, крафт","url":"/product/эль-тёмный/","group":"Публичная витрина","order":60,
+ "note":"Карточка алкогольного товара. Плашка ограничения стоит ВПЛОТНУЮ к цене, а не внизу страницы. Два состояния роли.",
+ "states":["информационное (гость, заявитель)","оптовое (подтверждённый оптовик)"]}
+-->
+
+{{> pagehead h1="Эль тёмный, крафт" crumb2="<a href=\"catalog.html\">Каталог</a><span class=\"crumbs__sep\">›</span><a href=\"alcohol.html\">Алкогольная витрина</a><span class=\"crumbs__sep\">›</span>" }}
+
+<section class="section section--cool">
+  <div class="container">
+    <div class="grid grid-2" style="align-items:start">
+
+      <div>
+        <script class="ann" type="application/json">
+        {"section":"Галерея",
+         "what":"Изображения позиции.",
+         "how":"Как в обычной карточке.",
+         "why":"Информационная задача та же: показать, что именно стоит в зале.",
+         "src":"«Структура», Карточка алкогольного товара"}
+        </script>
+        <div style="background:#fff;border-radius:var(--r-md);padding:var(--s5);display:flex;align-items:center;justify-content:center;min-height:420px">
+          <img src="assets/products/09-alkogolnaya-vitrina/pivo-temnoe.png" alt="Эль тёмный, крафт" style="max-height:360px;width:auto;mix-blend-mode:multiply">
+        </div>
+      </div>
+
+      <div>
+        <script class="ann" type="application/json">
+        {"section":"Название, цена и плашка ограничения",
+         "what":"Название, производитель, объём, цена как справка и сразу под ней — плашка о запрете дистанционной продажи.",
+         "how":"Плашка стоит ВПЛОТНУЮ к цене, а не внизу страницы. У подтверждённого оптовика формулировка другая и появляются количество и «В корзину» (ТЗ 21.1).",
+         "why":"Цена без пояснения читается как приглашение купить. Ограничение должно стоять там, куда смотрит глаз, — рядом с числом.",
+         "src":"«Структура», Карточка алкогольного товара; ТЗ 21.1"}
+        </script>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap" class="u-mb2">
+          <span class="tag tag--green">Алкогольная витрина · Пиво</span>
+          <span class="tag tag--dark">18+</span>
+        </div>
+        <h1 class="u-mb2" style="font-size:var(--fs-h1);line-height:var(--lh-h1)">Эль тёмный, крафт</h1>
+
+        <div class="facts facts--inline u-mb3" style="font-size:var(--fs-sm)">
+          <div class="fact"><span class="fact__label">Артикул</span><span class="fact__value u-mono" style="font-size:var(--fs-sm)">ALC-0311</span></div>
+          <div class="fact"><span class="fact__label">Страна</span><span class="fact__value" style="font-size:var(--fs-sm)">Россия</span></div>
+          <div class="fact"><span class="fact__label">Производитель</span><span class="fact__value" style="font-size:var(--fs-sm)">[заполняется]</span></div>
+        </div>
+
+        <div class="card" style="background:#fff">
+          <!-- ИНФОРМАЦИОННОЕ СОСТОЯНИЕ -->
+          <template data-role-only="guest applicant">
+            <div class="price u-mb2">
+              <span class="price__value" style="font-size:var(--fs-h1);line-height:1">320 ₽</span>
+              <span class="price__unit" style="font-size:var(--fs-body)">за бутылку 0,5 л · цена справочно</span>
+            </div>
+            <!-- Плашка вплотную к цене -->
+            <div class="notice notice--alcohol u-mb0">
+              <span class="notice__icon">🔞</span>
+              <span class="notice__body">
+                <b class="notice__title">Дистанционная продажа не осуществляется</b>
+                Товар доступен для приобретения только в магазине.
+                Кнопки покупки на этой странице нет и не существует в её коде.
+              </span>
+            </div>
+            <div style="display:flex;gap:var(--s2);flex-wrap:wrap;margin-top:var(--s3)">
+              <a class="btn btn--primary" href="contacts.html">Где купить →</a>
+              <a class="btn btn--secondary" href="wholesale.html">Оптовым покупателям</a>
+            </div>
+          </template>
+
+          <!-- ОПТОВОЕ СОСТОЯНИЕ -->
+          <template data-role-only="wholesale">
+            <div class="price-pair u-mb3">
+              <div class="price price--retail">
+                <span class="price__value">320 ₽</span>
+                <span class="price__unit">розничная цена за бутылку 0,5 л</span>
+              </div>
+              <div class="price price--personal">
+                <span class="price__value" style="font-size:var(--fs-h1);line-height:1">282 ₽</span>
+                <span class="price__unit" style="font-size:var(--fs-body)">ваша цена за бутылку · скидка 12 %</span>
+              </div>
+            </div>
+            <span class="product__stock u-mb3" style="display:flex">Доступно для оптового заказа: 96 бутылок</span>
+            <div style="display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center" class="u-mb3">
+              <div class="qty" data-step="12" data-min="12" data-unit="шт">
+                <button type="button" data-qty="down" aria-label="Меньше">−</button>
+                <span class="qty__value">24 шт</span>
+                <button type="button" data-qty="up" aria-label="Больше">+</button>
+              </div>
+              <button class="btn btn--primary btn--lg" type="button">В корзину</button>
+            </div>
+            <div class="notice notice--warn u-mb0">
+              <span class="notice__icon">🧾</span>
+              <span class="notice__body">
+                <b class="notice__title">Оптовый заказ, самовывоз со склада</b>
+                Дистанционная продажа частным лицам не ведётся. Онлайн-оплаты нет:
+                после оформления формируется счёт на предоплату.
+              </span>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <p class="brief">
+      Эль тёмный крафтовый, 0,5 литра — позиция алкогольной витрины Foodbeer,
+      справочная цена 320 рублей за бутылку. Раздел информационный: дистанционная
+      продажа алкогольной продукции не осуществляется, товар приобретается в магазине.
+      Подтверждённые оптовые покупатели могут оформить оптовый заказ со счётом
+      на предоплату и самовывозом со склада.
+    </p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="grid grid-2" style="align-items:start">
+      <div>
+        <script class="ann" type="application/json">
+        {"section":"Характеристики",
+         "what":"Стиль, плотность, объём, производитель.",
+         "how":"Обычная таблица характеристик. Незаполненные поля не выводятся вообще.",
+         "why":"Информационная ценность страницы — в точных данных, других задач у неё нет.",
+         "src":"«Структура», Карточка алкогольного товара"}
+        </script>
+        <h2 class="u-mb3">Характеристики</h2>
+        <div class="table-wrap">
+          <table class="table table--spec table--cards">
+            <tr><th>Стиль</th><td data-label="Стиль">Тёмный эль</td></tr>
+            <tr><th>Объём</th><td data-label="Объём">0,5 л</td></tr>
+            <tr><th>Формат продажи</th><td data-label="Формат">Бутылка</td></tr>
+            <tr><th>Страна</th><td data-label="Страна">Россия</td></tr>
+          </table>
+        </div>
+        <p style="margin-top:var(--s2);font-size:var(--fs-caption);color:var(--muted)">
+          Плотность и крепость не выводятся: подтверждённых значений в учётной системе нет.
+          Незаполненные данные не показываются ни прочерком, ни заглушкой.
+        </p>
+      </div>
+
+      <div>
+        <script class="ann" type="application/json">
+        {"section":"Где купить",
+         "what":"Адрес, режим работы, кнопка маршрута.",
+         "how":"Заменяет собой блок покупки у публичного посетителя.",
+         "why":"Единственное действие, которое страница может предложить, — прийти в магазин.",
+         "src":"«Структура», Карточка алкогольного товара"}
+        </script>
+        <h2 class="u-mb3">Где купить</h2>
+        <div class="card">
+          <div class="table-wrap u-mb3">
+            <table class="table table--spec table--cards">
+              <tr><th>Адрес</th><td data-label="Адрес">[заполняется перед запуском]</td></tr>
+              <tr><th>Режим работы</th><td data-label="Режим">пн–вс, 10:00–21:00</td></tr>
+            </table>
+          </div>
+          <a class="btn btn--primary btn--block" href="contacts.html">Построить маршрут →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--food-pattern">
+  <script class="ann" type="application/json">
+  {"section":"С чем сочетать",
+   "what":"Подборка закусок и материалов журнала.",
+   "how":"В подборку попадают ТОЛЬКО неалкогольные позиции.",
+   "why":"Позволяет вернуть посетителя в коммерческую часть каталога, не нарушая ограничений.",
+   "src":"«Структура», Карточка алкогольного товара"}
+  </script>
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Только неалкогольные позиции</span><h2>С чем сочетать</h2></div>
+    <div class="grid grid-4">
+      {{> product img="02-myasnye-delikatesy/salyami-batony-i-narezka.png" cat="Мясные деликатесы" name="Салями Милано" country="Италия" maker="Parma Food" price="420 ₽" wprice="370 ₽" unit="100 г" }}
+      {{> product img="01-syry/syr-tverdyy-vyderzhannyy.png" cat="Сыры" name="Грана Падано 16 мес." country="Италия" maker="Consorzio" price="450 ₽" wprice="396 ₽" unit="100 г" }}
+      {{> product img="04-zakuski-i-antipasti/krekery.png" cat="Закуски" name="Крекеры с морской солью" country="Италия" maker="Grissini Co" price="210 ₽" wprice="185 ₽" unit="упаковку" }}
+      {{> product img="04-zakuski-i-antipasti/olivki-zelenye.png" cat="Закуски" name="Оливки зелёные с косточкой" country="Греция" maker="Kalamata Gold" price="180 ₽" wprice="158 ₽" unit="100 г" }}
+    </div>
+  </div>
+</section>
